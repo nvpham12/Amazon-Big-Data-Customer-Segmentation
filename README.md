@@ -35,12 +35,21 @@ The analysis is subject to the following limitations:
 # Modeling
 The model will use K-Means Clustering, an unsupervised machine learning algorithm. K-Means initializes a selected k number of points called means or centroids. It then finds the nearest distances between each data point the nearest centroid (using Euclidean distance) updating the positions of centroids. The process is repeated until we have unchanging centroids or cluster assignments, or until we have reached the maximum number of iterations.
 
-The optimal K number of clusters, 4, was chosen for this project by combining results from the Elbow Method and Silhouette Method. 
+Before fitting the model, K needs to be chosen. 2 commonly used techniques for this are the Elbow Method and Silhouette Method.
 
 ## Elbow Method
+![wcss_elbow](https://github.com/user-attachments/assets/c30687ac-34f8-4e9c-8390-744c6dd61dec)
+The kinks or angles appear in the curve at values of 3 and 4 for K. Since the curve appears linear after 4, we k=4 is the better option.
 
 ## Silhouette Method
+![silhoutte_score](https://github.com/user-attachments/assets/b3c89fe7-0f4f-48ab-9f02-fa99a4e7ecf6)
+The value of K with the highest Silhouette Score is 2. However, the Silhouette Scores at k=4 and k=6 are not too far off from the score for k=2. 
+
+## Choice of K
+Combining the results, we would choose k=4, since it is the best choice from the Elbow Method and the Silhouette Score is not too far off from the highest score at k=2.
 
 # Segments
+
+![segment_pie](https://github.com/user-attachments/assets/695491ee-89f4-48f9-8c35-3beee28d7890)
 
 # Recommendations
