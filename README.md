@@ -90,12 +90,13 @@ Hibernating
 
 Lost
 - Customers who have churned.
+- 
+![rfm_segment_count](https://github.com/user-attachments/assets/1d9bd0ca-d0c6-470a-94cc-d73edf45cbea)
 
-![rfm_segment_count](https://github.com/user-attachments/assets/5c6456c4-2e3c-47bd-90d3-83c6df6f8d5f)
-This is a plot of the number of members in each segment. Amazon has very few new or promising customers, which is probably due to Amazon being an established giant in E-commerce. However, even though Amazon has a large number of Loyal Customers and Champions, there are larger number of customers who may be starting to churn.
+This is a plot of the number of members in each segment. Amazon had too few new or promising customers, so they weren't shown on the plot. This is probably due to Amazon being an established giant in E-commerce. However, even though Amazon has a large number of Loyal Customers and Champions, there are larger number of customers who may be starting to churn.
 
 # Recommendations for RFM Segments
-- Customers who are in the segments About to Sleep, Needs Attention, and At Risk should be targeted with discounts and promotions. These could be showing discounted products in their product recommendations (on the front page) or Amazon could offer these customers a month of free Amazon Prime through a message or email.
+- Customers who are in the About to Sleep, Needs Attention, At Risk, and Can't Lose Them segments should be targeted with discounts and promotions. These could be showing discounted products in their product recommendations (on the front page) or Amazon could offer these customers a month of free Amazon Prime through a message or email.
 - Promising customers should also be targeted with a month of free Amazon Prime if they don't have a subscription already.  
 - Generally, marketing campaigns are launched to find New Customers and to try and reach out to Hibernating and Lost customers to try and rekindle interest and get them to return.
 - For Champions, Loyal Customers, and Potential Loyalists Amazon could benefit from enhanced cash back programs. 
