@@ -12,11 +12,11 @@ The data was first extracted from the source (https://huggingface.co/datasets/Mc
 - Dropped duplicates
 - Filtered data to last 2 years of observations and only reviews with verified purchases
 - Removed incorrect observations and columns
-- Converted data types such as timestamp in milliseconds to seconds and price to double type (a type of integer in PySpark)
+- Converted data types to proper format such as timestamp to seconds and price to double (a type of integer in PySpark)
 
 # Feature Engineering
-Recency, Frequency, and Monetary (RFM) metrics will be used as the features for the model. Since we do not have customer purchase dates in the data, we will work around this by using review date as a proxy for purchase time. Because the data includes an indicator for verified purchases, we can screen whether reviewers are customers in the data. The RFM features will represent the following in this project:
-- Recency will measure how recent the review left by the customer is (using 1 full year back from the last review left; September 2022 to September 2023) as a proxy for how recent a customer made a purchase
+Recency, Frequency, and Monetary (RFM) metrics will be used as the features for the model. Since we do not have customer purchase dates in the data, the traditional RFM metrics can't be obtained. However, a work around is to use review date as a proxy for purchase time. Because the data includes an indicator for verified purchases, reviewers can be screened to find verified customers. The RFM features in this project will be represented as follows:
+- Recency will measure how recent the review left by the customer is as a proxy for how recent a customer made a purchase
 - Frequency will measure how often a customer leaves reviews as a proxy for how often a customer made purchases
 - Monetary will measure how much a customer spends based on prices of the product they reviewed
 
@@ -31,9 +31,7 @@ Analysis is subject to the following limitations:
 - Scaled the data using Standard Scaler
 
 # Modeling
-The model will use K-Means Clustering, an unsupervised machine learning algorithm. K-Means initializes a selected k number of points called means or centroids. It then finds the nearest distances between each data point the nearest centroid (using Euclidean distance) updating the positions of centroids. The process is repeated until we have unchanging centroids or cluster assignments, or until we have reached the maximum number of iterations.
-
-Before fitting the model, K needs to be chosen. 2 commonly used techniques for this are the Elbow Method and Silhouette Method.
+The model will use K-Means Clustering, an unsupervised machine learning algorithm. K-Means initializes a selected k number of points called means or centroids. It then finds the nearest distances between each data point the nearest centroid (using Euclidean distance) updating the positions of centroids. The process is repeated until we have unchanging centroids or cluster assignments, or until we have reached the maximum number of iterations. Before fitting the model, K needs to be chosen. 2 commonly used techniques for this are the Elbow Method and Silhouette Method.
 
 ## Elbow Method
 ![wcss_elbow](https://github.com/user-attachments/assets/c30687ac-34f8-4e9c-8390-744c6dd61dec)
@@ -48,8 +46,16 @@ The value of k with the highest Silhouette Score is 2. However, the Silhouette S
 Combining the results, we would choose k=4, since it is the best choice from the Elbow Method and the Silhouette Score is not too far off from the highest score at k=2.
 
 # K-Means Cluster Segments
+Clusters were labeled based on analysis of the average values for each RFM metric in each cluster. The 4 clusters are Churned, New Customers, Loyal Customers, and One Time Big Spenders. 
+
 ![segment_pie](https://github.com/user-attachments/assets/695491ee-89f4-48f9-8c35-3beee28d7890)
-Clusters were labeled based on analysis of the average values for each RFM metric in each cluster. New customers make up around 30% of the total customers. The churned and one time big spenders combine to around half the total customers.
+New customers make up around 30% of the total customers. The churned and one time big spenders combine to around half the total customers.
+
+# Recommendations for K-Means Cluster Segments
+- New customers should also be targeted with a month of free Amazon Prime if they don't have a subscription already.  
+- Generally, marketing campaigns are launched to find New Customers and to try and reach out to Churned Customers to try and rekindle interest and get them to return.
+- Amazon could try launching an enhanced cash back program for Loyal Customers. Currently, Amazon offers cashback only to customers who make purchases using an Amazon Chase Visa. Amazon could try rolling out a cashback program to users without the Amazon credit card at lower rates such as 1% for all customers or 2% for customers with Prime. To prevent abuse, the cashback could be given to customers some time after the return periods for the item closes. Amazon could also try setting different cashback rates according to spending levels. One reference for this is Hilton's Honors Program which sets account levels of Member, Silver, Gold, and Diamond based on number of nights or stays.
+- Amazon could also try implementing a loyalty program providing points based on per dollar spending that can be exchanged for rewards. This would make Loyal Customers happy and could be attractive to New Customers.
 
 # RFM Segments
 In addition to K-Means, customers could also be segmented using RFM metrics. The method is to set rules or thresholds based on RFM scores and assign the customer to a segment. The following are some common marketing labels that will be used in this project:
@@ -87,9 +93,9 @@ Lost
 ![rfm_segment_count](https://github.com/user-attachments/assets/5c6456c4-2e3c-47bd-90d3-83c6df6f8d5f)
 This is a plot of the number of members in each segment. Amazon has very few new or promising customers, which is probably due to Amazon being an established giant in E-commerce. However, even though Amazon has a large number of Loyal Customers and Champions, there are larger number of customers who may be starting to churn.
 
-# Recommendations
+# Recommendations for RFM Segments
 - Customers who are in the segments About to Sleep, Needs Attention, and At Risk should be targeted with discounts and promotions. These could be showing discounted products in their product recommendations (on the front page) or Amazon could offer these customers a month of free Amazon Prime through a message or email.
-- Promising customers should also be targeted with a month of free Amazon Prime if they don't have one already.  
+- Promising customers should also be targeted with a month of free Amazon Prime if they don't have a subscription already.  
 - Generally, marketing campaigns are launched to find New Customers and to try and reach out to Hibernating and Lost customers to try and rekindle interest and get them to return.
-- For Champions, Loyal Customers, and Potential Loyalists Amazon could benefit from enhanced cash back programs. Currently, Amazon offers cashback only to customers who make purchases using an Amazon Chase Visa. Amazon could try rolling out a cashback program to users without the Amazon credit card at lower rates such as 1% for all customers or 2% for customers with Prime. To prevent abuse, the cashback could be given to customers some time after the return periods for the item closes.
-- Amazon could also try implementing a loyalty program proviiding points based on per dollar spending that can be exchanged for rewards.
+- For Champions, Loyal Customers, and Potential Loyalists Amazon could benefit from enhanced cash back programs. 
+- Amazon could also try implementing a loyalty program providing points based on per dollar spending that can be exchanged for rewards. This would make Champions and Loyal Customers happy and could be attractive to New Customers or Potential Loyalists.
