@@ -15,9 +15,9 @@ The data was first extracted from the source (https://huggingface.co/datasets/Mc
 - Converted data types such as timestamp in milliseconds to seconds and price to double type (a type of integer in PySpark)
 
 # Feature Engineering
-RFM will be used as the features for the model. Since we do not have customer purchase dates in the data, we will work around this by using review date as a proxy for purchase time. Because the data includes an indicator for verified purchases, we can screen whether reviewers are customers in the data. The RFM features will represent the following in this project:
-- Recency will measure how recent the review left by the customer is (using 1 full year back from the last review left; September 2022 to September 2023)
-- Frequency will measure how often a customer leaves reviews
+Recency, Frequency, and Monetary (RFM) metrics will be used as the features for the model. Since we do not have customer purchase dates in the data, we will work around this by using review date as a proxy for purchase time. Because the data includes an indicator for verified purchases, we can screen whether reviewers are customers in the data. The RFM features will represent the following in this project:
+- Recency will measure how recent the review left by the customer is (using 1 full year back from the last review left; September 2022 to September 2023) as a proxy for how recent a customer made a purchase
+- Frequency will measure how often a customer leaves reviews as a proxy for how often a customer made purchases
 - Monetary will measure how much a customer spends based on prices of the product they reviewed
 
 Analysis is subject to the following limitations:
@@ -44,14 +44,52 @@ The angles appear in the curve at values of 3 and 4 for k. Since the curve appea
 ![silhoutte_score](https://github.com/user-attachments/assets/82dfa82a-c228-41d0-ab94-b378bad8cd7a)
 The value of k with the highest Silhouette Score is 2. However, the Silhouette Scores at k=4 and k=6 are not too far off from the score for k=2. 
 
-## Choice of k
+## Choice of k Clusters
 Combining the results, we would choose k=4, since it is the best choice from the Elbow Method and the Silhouette Score is not too far off from the highest score at k=2.
 
-# Cluster Segments
+# K-Means Cluster Segments
 ![segment_pie](https://github.com/user-attachments/assets/695491ee-89f4-48f9-8c35-3beee28d7890)
 Clusters were labeled based on analysis of the average values for each RFM metric in each cluster. New customers make up around 30% of the total customers. The churned and one time big spenders combine to around half the total customers.
 
 # RFM Segments
+In addition to K-Means, customers could also be segmented using RFM metrics. The method is to set rules or thresholds based on RFM scores and assign the customer to a segment. The following are some common marketing labels that will be used in this project:
 
+Champions
+- These are the best customers, purchasing most recently, most frequently, and spending the most money.
+
+Loyal Customers
+- Customers who have made some less recent purchases and spend a little less than champions. But these customers still have made very recent and frequent purchases, and have spent sizeable sums.
+
+Potential Loyalist
+- Customers who made recent purchases, but spent moderate amounts with moderate frequncy.
+
+New customers
+- Customers who made the most recent purchases, but have minimal frequency and spending.
+
+Promising
+- Customers who made very recent purchases but have spent have low frequency and spending.
+
+Needs Attention
+- Customers who have moderate frequency and spending, but it's been a while since they made a new purchase.
+
+About To Sleep
+- Customers who have moderate spending but haven't made recent or frequenct purchases.
+
+Can't Lose Them
+- Customers have haven't made recent purchases but have previously made frequent purchases with high spendings.
+
+Hibernating
+- Customers who haven't made a purchase in while and have spent infrequently and little. They have probably churned.
+
+Lost
+- Customers who have churned.
+
+![rfm_segment_count](https://github.com/user-attachments/assets/5c6456c4-2e3c-47bd-90d3-83c6df6f8d5f)
+This is a plot of the number of members in each segment. Amazon has very few new or promising customers, which is probably due to Amazon being an established giant in E-commerce. However, even though Amazon has a large number of Loyal Customers and Champions, there are larger number of customers who may be starting to churn.
 
 # Recommendations
+- Customers who are in the segments About to Sleep, Needs Attention, and At Risk should be targeted with discounts and promotions. These could be showing discounted products in their product recommendations (on the front page) or Amazon could offer these customers a month of free Amazon Prime through a message or email.
+- Promising customers should also be targeted with a month of free Amazon Prime if they don't have one already.  
+- Generally, marketing campaigns are launched to find New Customers and to try and reach out to Hibernating and Lost customers to try and rekindle interest and get them to return.
+- For Champions, Loyal Customers, and Potential Loyalists Amazon could benefit from enhanced cash back programs. Currently, Amazon offers cashback only to customers who make purchases using an Amazon Chase Visa. Amazon could try rolling out a cashback program to users without the Amazon credit card at lower rates such as 1% for all customers or 2% for customers with Prime. To prevent abuse, the cashback could be given to customers some time after the return periods for the item closes.
+- Amazon could also try implementing a loyalty program proviiding points based on per dollar spending that can be exchanged for rewards.
