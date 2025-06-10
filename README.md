@@ -1,5 +1,5 @@
 # Project Overview
-This a big data customer segmentation project on Amazon electronic product data leveraging PySpark, MLlib, K-Means Clustering, and RFM Analysis. Refer to the Jupyter Notebook file for more technical details.
+This a project on big data customer segmentation using Amazon electronic product data and leveraging tools such as PySpark, MLlib, K-Means Clustering, and RFM Analysis. Refer to the Jupyter Notebook file for more technical details.
 
 # Data
 The dataset contains information Amazon product user reviews and item metadata between May 1996 to September 2023. The data was scraped from Amazon by McAuley Lab at UC San Diego. While there are other product categories available, this project will use electronics product data.
@@ -23,10 +23,11 @@ Recency, Frequency, and Monetary (RFM) metrics will be used as the features for 
 Analysis is subject to the following limitations:
 - Reviews aren't necessarily left at time of purchase, but often left some time after the purchase
 - Not everyone leaves a review (volunteer bias)
-- Frequency does not take into account purchases of multiple quantities
-- The monetary feature is based on the price of the product reviewed, which may not perfectly reflect the price paid for the product. Products can change in price over time (or receive discounts), which isn't accounted for in this project. The scrape will only take into account the price of the product when it was scraped from Amazon.
+- Frequency does not account for purchases of multiple quantities
+- The monetary feature is based on the price of the product reviewed, which may not perfectly reflect the price paid for the product. Products can change in price over time (or receive discounts), which isn't accounted for when scraping the data.
 
 # Data Preprocessing
+- The data is filtered further to a 1 year range between 9/13/2022 to 9/13/2023 based on the date of the most recent review
 - Applied a log transformation on skewed features
 - Scaled the data using Standard Scaler
 
@@ -40,7 +41,7 @@ The angles appear in the curve at values of 3 and 4 for k. Since the curve appea
 
 ## Silhouette Method
 ![silhoutte_score](https://github.com/user-attachments/assets/82dfa82a-c228-41d0-ab94-b378bad8cd7a)
-The value of k with the highest Silhouette Score is 2. However, the Silhouette Scores at k=4 and k=6 are not too far off from the score for k=2. 
+The value of k with the highest Silhouette Score is 2. However, the Silhouette Scores for k=4 and k=6 are not too far off from the score for k=2. 
 
 ## Choice of k Clusters
 Combining the results, we would choose k=4, since it is the best choice from the Elbow Method and the Silhouette Score is not too far off from the highest score at k=2.
@@ -54,17 +55,17 @@ New customers make up around 30% of the total customers. The churned and one tim
 # Recommendations for K-Means Cluster Segments
 - New customers should also be targeted with a month of free Amazon Prime if they don't have a subscription already.  
 - Generally, marketing campaigns are launched to find New Customers and to try and reach out to Churned Customers to try and rekindle interest and get them to return.
-- Amazon could try launching an enhanced cash back program for Loyal Customers. Currently, Amazon offers cashback only to customers who make purchases using an Amazon Chase Visa. Amazon could try rolling out a cashback program to users without the Amazon credit card at lower rates such as 1% for all customers or 2% for customers with Prime. To prevent abuse, the cashback could be given to customers some time after the return periods for the item closes. Amazon could also try setting different cashback rates according to spending levels. One reference for this is Hilton's Honors Program which sets account levels of Member, Silver, Gold, and Diamond based on number of nights or stays.
+- Amazon could try launching an enhanced cash back program for Loyal Customers. Currently, Amazon offers cashback only to customers who make purchases using an Amazon Chase Visa. Amazon could try rolling out a cashback program to users without the Amazon credit card at lower rates such as 1% for all customers or 2% for customers with Prime. To prevent abuse, the cashback could be given to customers after the return periods for the item closes. Amazon could also try setting different cashback rates according to spending levels. One reference for this is Hilton's Honors Program which sets account levels of Member, Silver, Gold, and Diamond based on number of nights or stays.
 - Amazon could also try implementing a loyalty program providing points based on per dollar spending that can be exchanged for rewards. This would make Loyal Customers happy and could be attractive to New Customers.
 
 # RFM Segments
 In addition to K-Means, customers could also be segmented using RFM metrics. The method is to set rules or thresholds based on RFM scores and assign the customer to a segment. The following are some common marketing labels that will be used in this project:
 
 Champions
-- These are the best customers, purchasing most recently, most frequently, and spending the most money.
+- These are the best customers, with the most recent and frequent purchases and with the most dollar spendings.
 
 Loyal Customers
-- Customers who have made some less recent purchases and spend a little less than champions. But these customers still have made very recent and frequent purchases, and have spent sizeable sums.
+- Customers who have made some less recent purchases and spend a little less than champions. But these customers have still made very recent and frequent purchases with sizeable spendings.
 
 Potential Loyalist
 - Customers who made recent purchases, but spent moderate amounts with moderate frequncy.
