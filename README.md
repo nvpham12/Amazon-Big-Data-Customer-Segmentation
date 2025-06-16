@@ -52,6 +52,11 @@ Clusters were labeled based on analysis of the average values for each RFM metri
 ![segment_pie](https://github.com/user-attachments/assets/695491ee-89f4-48f9-8c35-3beee28d7890)
 New customers make up around 30% of the total customers. The churned and one time big spenders combine to around half the total customers.
 
+# K-Means Clustering Validation
+- The clusters are not significantly imbalanced and cluster sizes are acceptable.
+- The Silhouette Score for the clustering is around 0.49, which is moderate clustering quality and indicates room for improvement.
+- The true optimal k may have been of higher values like 8 or 10, but those were not tested due to being computationally demanding and the marketing norm is to select between a k from 2 to 6.
+
 # Recommendations for K-Means Cluster Segments
 - New customers should also be targeted with a month of free Amazon Prime if they don't have a subscription already.  
 - Generally, marketing campaigns are launched to find New Customers and to try and reach out to Churned Customers to try and rekindle interest and get them to return.
@@ -60,6 +65,8 @@ New customers make up around 30% of the total customers. The churned and one tim
 
 # RFM Segments
 In addition to K-Means, customers could also be segmented using RFM metrics. The method is to set rules or thresholds based on RFM scores and assign the customer to a segment. The following are some common marketing labels that will be used in this project:
+
+The customers have been segmented according to their RFM scores using common labels in marketing.
 
 Champions
 - These are the best customers, with the most recent and frequent purchases and with the most dollar spendings.
@@ -76,11 +83,11 @@ New customers
 Promising
 - Customers who made very recent purchases but have spent have low frequency and spending.
 
-Needs Attention
-- Customers who have moderate frequency and spending, but it's been a while since they made a new purchase.
-
 About To Sleep
 - Customers who have moderate spending but haven't made recent or frequenct purchases.
+
+Hibernating
+- Customers who haven't made a purchase in while and have spent infrequently and little. They have probably churned.
 
 Can't Lose Them
 - Customers who haven't made recent purchases but have previously made frequent purchases with high spendings.
@@ -88,8 +95,8 @@ Can't Lose Them
 At Risk
 - Customers who haven't made recent purchases but have lower spendings and frequent purchases than those under Can't Lose Them.
 
-Hibernating
-- Customers who haven't made a purchase in while and have spent infrequently and little. They have probably churned.
+Needs Attention
+- Customers who have moderate frequency and spending, but it's been a while since they made a new purchase.
 
 Lost
 - Customers who have churned.
