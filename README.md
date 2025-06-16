@@ -90,7 +90,7 @@ Hibernating
 
 Lost
 - Customers who have churned.
-- 
+
 ![rfm_segment_count](https://github.com/user-attachments/assets/1d9bd0ca-d0c6-470a-94cc-d73edf45cbea)
 
 This is a plot of the number of members in each segment. Amazon had too few new or promising customers, so they weren't shown on the plot. This is probably due to Amazon being an established giant in E-commerce. However, even though Amazon has a large number of Loyal Customers and Champions, there are larger number of customers who may be starting to churn.
