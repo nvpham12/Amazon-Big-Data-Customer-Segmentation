@@ -83,7 +83,10 @@ About To Sleep
 - Customers who have moderate spending but haven't made recent or frequenct purchases.
 
 Can't Lose Them
-- Customers have haven't made recent purchases but have previously made frequent purchases with high spendings.
+- Customers who haven't made recent purchases but have previously made frequent purchases with high spendings.
+
+At Risk
+- Customers who haven't made recent purchases but have lower spendings and frequent purchases than those under Can't Lose Them.
 
 Hibernating
 - Customers who haven't made a purchase in while and have spent infrequently and little. They have probably churned.
