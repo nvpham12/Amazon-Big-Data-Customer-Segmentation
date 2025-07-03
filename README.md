@@ -5,7 +5,7 @@ This a project on big data customer segmentation using Amazon electronic product
 The dataset contains information Amazon product user reviews and item metadata between May 1996 to September 2023. The data was scraped from Amazon by McAuley Lab at UC San Diego. While there are other product categories available, this project will use electronics product data.
 
 # ETL Process
-The data was first extracted from the source (https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023) using Hugging Face's datasets library, then converted into parquet storage format. McAuley Lab scraped the data from Amazon. The transformation to parquet was required as the data was too large for Pandas, direct PySpark dataframe creation, or arrow tables. The parquet files were then read into PySpark.
+The data was first extracted from the [source](https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023) using Hugging Face's datasets library, then converted into parquet storage format. McAuley Lab scraped the data from Amazon. The transformation to parquet was required as the data was too large for Pandas, direct PySpark dataframe creation, or arrow tables. The parquet files were then read into PySpark.
 
 # Data Cleaning
 - Converted missing value strings such as 'none' and 'n/a' into nulls
