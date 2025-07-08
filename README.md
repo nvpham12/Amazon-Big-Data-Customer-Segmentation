@@ -1,5 +1,22 @@
 # Project Overview
-This a project on big data customer segmentation using Amazon electronic product data and leveraging tools such as PySpark, MLlib, K-Means Clustering, and RFM Analysis. Refer to the Jupyter Notebook file for more technical details.
+This project focuses on customer segmentation using big data from Amazon electronics product reviews. It integrates product metadata with customer review data using Spark SQL joins and applies feature engineering and unsupervised learning to identify behavioral customer segments.
+
+The project includes an end-to-end workflow: 
+- ETL
+- Exploratory analysis and data cleaning with PySpark
+- Feature engineering using RFM (Recency, Frequency, Monetary) metrics
+- Clustering via K-Means using MLlib
+- Business recommendations based on both cluster and RFM analysis
+
+Technical implementation is documented in two separate Jupyter Notebooks:  
+- **EDA Notebook** – for exploration, SQL querying, and data profiling  
+- **Modeling Notebook** – for feature engineering, clustering, and segment interpretation
+
+# Tools & Technologies
+- **PySpark** – for distributed data cleaning, joining, and feature engineering
+- **Spark SQL** – for scalable querying, including complex joins and aggregations
+- **MLlib** – for K-Means clustering and unsupervised segmentation
+- **Pandas, Matplotlib, Seaborn** – for additional analysis and visualization, using colorblind-friendly templates
 
 # Data
 The dataset contains information Amazon product user reviews and item metadata between May 1996 to September 2023. The data was scraped from Amazon by McAuley Lab at UC San Diego. While there are other product categories available, this project will use electronics product data.
@@ -7,29 +24,40 @@ The dataset contains information Amazon product user reviews and item metadata b
 # ETL Process
 The data was first extracted from the [source](https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023) using Hugging Face's datasets library, then converted into parquet storage format. McAuley Lab scraped the data from Amazon. The transformation to parquet was required as the data was too large for Pandas, direct PySpark dataframe creation, or arrow tables. The parquet files were then read into PySpark.
 
+# Exploratory Data Analysis (EDA)
+Before modeling, exploratory SQL queries and visualizations were conducted to better understand product and review dynamics:
+- Identified misplaced product categories and invalid rating values that required cleaning.
+- Found the top 20 most-reviewed products in 2023 to explore customer engagement patterns.
+
+![2023_popular_products](https://github.com/user-attachments/assets/2c738685-86dd-4cf9-9e15-a9a735bede04)
+
+- Visualized the 2023 rating distribution to assess customer satisfaction trends.
+
+![rating_distribution](https://github.com/user-attachments/assets/a686da60-1d6a-4fb6-999b-7f49dfa784f8)
+
 # Data Cleaning
-- Converted missing value strings such as 'none' and 'n/a' into nulls
-- Dropped duplicates
-- Filtered data to last 2 years of observations and only reviews with verified purchases
-- Removed incorrect observations and columns
-- Converted data types to proper format such as timestamp to seconds and price to double (a type of integer in PySpark)
+- Converted missing value strings such as 'none' and 'n/a' into nulls.
+- Dropped duplicates.
+- Filtered data to last 2 years of observations and only reviews with verified purchases.
+- Removed incorrect observations and columns.
+- Converted data types to proper format such as timestamp to seconds and price to double (a type of integer in PySpark).
 
 # Feature Engineering
 Recency, Frequency, and Monetary (RFM) metrics will be used as the features for the model. Since we do not have customer purchase dates in the data, the traditional RFM metrics can't be obtained. However, a work around is to use review date as a proxy for purchase time. Because the data includes an indicator for verified purchases, reviewers can be screened to find verified customers. The RFM features in this project will be represented as follows:
-- Recency will measure how recent the review left by the customer is as a proxy for how recent a customer made a purchase
-- Frequency will measure how often a customer leaves reviews as a proxy for how often a customer made purchases
-- Monetary will measure how much a customer spends based on prices of the product they reviewed
+- Recency will measure how recent the review left by the customer is as a proxy for how recent a customer made a purchase.
+- Frequency will measure how often a customer leaves reviews as a proxy for how often a customer made purchases.
+- Monetary will measure how much a customer spends based on prices of the product they reviewed.
 
 Analysis is subject to the following limitations:
-- Reviews aren't necessarily left at time of purchase, but often left some time after the purchase
-- Not everyone leaves a review (volunteer bias)
-- Frequency does not account for purchases of multiple quantities
+- Reviews aren't necessarily left at time of purchase, but often left some time after the purchase.
+- Not everyone leaves a review (volunteer bias).
+- Frequency does not account for purchases of multiple quantities.
 - The monetary feature is based on the price of the product reviewed, which may not perfectly reflect the price paid for the product. Products can change in price over time (or receive discounts), which isn't accounted for when scraping the data.
 
 # Data Preprocessing
-- The data is filtered further to a 1 year range between 9/13/2022 to 9/13/2023 based on the date of the most recent review
-- Applied a log transformation on skewed features
-- Scaled the data using Standard Scaler
+- The data is filtered further to a 1 year range between 9/13/2022 to 9/13/2023 based on the date of the most recent review.
+- Applied a log transformation on skewed features.
+- Scaled the data using Standard Scaler.
 
 # Modeling
 The model will use K-Means Clustering, an unsupervised machine learning algorithm. K-Means initializes a selected k number of points called means or centroids. It then finds the nearest distances between each data point the nearest centroid (using Euclidean distance) updating the positions of centroids. The process is repeated until we have unchanging centroids or cluster assignments, or until we have reached the maximum number of iterations. Before fitting the model, K needs to be chosen. 2 commonly used techniques for this are the Elbow Method and Silhouette Method.
@@ -111,3 +139,13 @@ This is a plot of the number of members in each segment. Amazon had too few new 
 - Generally, marketing campaigns are launched to find New Customers and to try and reach out to Hibernating and Lost customers to try and rekindle interest and get them to return.
 - For Champions, Loyal Customers, and Potential Loyalists Amazon could benefit from enhanced cash back programs. 
 - Amazon could also try implementing a loyalty program providing points based on per dollar spending that can be exchanged for rewards. This would make Champions and Loyal Customers happy and could be attractive to New Customers or Potential Loyalists.
+
+# Insights
+- Some customer segments appear inconsistently placed within clusters (e.g., Champions grouped with One-Time Big Spenders, or Lost customers under New Customers), suggesting imperfect alignment between RFM segmentation and K-Means clustering.
+- These inconsistencies may indicate that the chosen number of clusters (k=4) is insufficient or that K-Means is not capturing the underlying structure well.
+- A large portion of customers fall under churn-related segments (e.g., About to Sleep, Hibernating, Lost), highlighting opportunities for re-engagement and retention strategies.
+
+# Next Steps
+- Test additional cluster values (e.g., k=6–10) to evaluate whether deeper segmentation yields more interpretable or actionable groupings.
+- Develop a predictive churn model using supervised learning to identify at-risk customers based on historical behavior.
+- Perform sentiment analysis on review text and map sentiment trends to customer segments for richer behavioral insight.
