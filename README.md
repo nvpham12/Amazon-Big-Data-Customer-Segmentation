@@ -20,8 +20,9 @@ Technical implementation is documented in two separate Jupyter Notebooks:
 - **Pandas, Matplotlib, Seaborn** – for additional analysis and visualization, using colorblind-friendly templates
 
 ## Data
-- The dataset contains information Amazon product user reviews and item metadata between May 1996 to September 2023. 
+- The dataset contains information Amazon product user reviews and item metadata between May 1996 to September 2023.
 - The data was scraped from Amazon by McAuley Lab at UC San Diego. While there are other product categories available, this project will use electronics product data.
+- The dataset contains 43,886,944 rows and 10 columns in the product reviews dataset and 1,610,012 rows and 16 columns in the product metadata dataset.
 
 ## Links
 - [EDA Jupyter Notebook](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/EDA_Amazon_Big_Data.ipynb)
