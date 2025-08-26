@@ -32,7 +32,7 @@ Technical implementation is documented in two separate Jupyter Notebooks:
 # Executive Summary
 ## Insights
 - Some customer segments appear to be incorrectly placed within clusters (e.g., Champions grouped with One-Time Big Spenders, or Lost customers under New Customers), suggesting imperfect alignment between RFM segmentation and K-Means clustering.
-- Considering the K-Means Clustering has a poor Silhouette Score, it may be making poor predictions and causing the irregularities. These inconsistencies may indicate that the chosen number of clusters (k=4) is insufficient or that the K-Means algorithm is not capturing the underlying structure of the data.
+- Considering the K-Means Clustering has a moderate Silhouette Score, it may be making poor predictions and causing the irregularities. These inconsistencies may indicate that the chosen number of clusters (k=4) is insufficient or that the K-Means algorithm is not capturing the underlying structure of the data.
 - Most of Amazon's customers fall under churn-related segments (e.g., About to Sleep, Hibernating, Lost), highlighting opportunities for targeted re-engagement and retention strategies.
 
 ## Recommendations
