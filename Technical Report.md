@@ -21,8 +21,9 @@ Technical implementation is documented in two separate Jupyter Notebooks:
 
 ## Data
 - The dataset contains information Amazon product user reviews and item metadata between May 1996 to September 2023.
-- The data was scraped from Amazon by McAuley Lab at UC San Diego. While there are other product categories available, this project will use electronics product data.
+- The data was scraped from Amazon by [McAuley Lab at UC San Diego.](https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023) While there are other product categories available, this project will use electronics product data.
 - The dataset contains 43,886,944 rows and 10 columns in the product reviews dataset and 1,610,012 rows and 16 columns in the product metadata dataset.
+
 
 ## Links
 - [EDA Jupyter Notebook](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/EDA_Amazon_Big_Data.ipynb)
@@ -70,21 +71,23 @@ The model will use K-Means Clustering, an unsupervised machine learning algorith
 
 ## Elbow Method
 ![wcss_elbow](https://github.com/user-attachments/assets/c30687ac-34f8-4e9c-8390-744c6dd61dec)
-The Elbow Method involves plotting within-cluster sum of squares (WCSS) against k and looking for the elbow, the point where the curve forms a kink or angle at some k.
-The angles appear in the curve at values of 3 and 4 for k. Since the curve appears linear after 4, k=4 is the better option.
+- The Elbow Method involves plotting within-cluster sum of squares (WCSS) against k and looking for the elbow, the point where the curve forms a kink or angle at some k.
+- The angles appear in the curve at values of 3 and 4 for k. Since the curve appears linear after 4, k=4 is the better option.
 
 ## Silhouette Method
 ![silhoutte_score](https://github.com/user-attachments/assets/82dfa82a-c228-41d0-ab94-b378bad8cd7a)
-The value of k with the highest Silhouette Score is 2. However, the Silhouette Scores for k=4 and k=6 are not too far off from the score for k=2. 
+- The value of k with the highest Silhouette Score is 2.
+- The Silhouette Scores for k=4 and k=6 are not too far off from the score for k=2. 
 
 ## Choice of k Clusters
-Combining the results, we would choose k=4, since it is the best choice from the Elbow Method and the Silhouette Score is not too far off from the highest score at k=2.
+From analysis of results from both methods, we would choose k=4, since it is the best choice from the Elbow Method and the Silhouette Score is not too far off from the highest score at k=2.
 
 # K-Means Cluster Segments
 Clusters were labeled based on analysis of the average values for each RFM metric in each cluster. The 4 clusters are Churned, New Customers, Loyal Customers, and One Time Big Spenders. 
 
 ![segment_pie](https://github.com/user-attachments/assets/695491ee-89f4-48f9-8c35-3beee28d7890)
-New customers make up around 30% of the total customers. The churned and one time big spenders combine to around half the total customers.
+- New customers make up around 30% of the total customers. 
+- The churned and one time big spenders combine to around half the total customers.
 
 # K-Means Clustering Validation
 - The clusters are not significantly imbalanced and cluster sizes are acceptable.
@@ -102,42 +105,32 @@ In addition to K-Means, customers could also be segmented using RFM metrics. The
 
 The customers have been segmented according to their RFM scores using common labels in marketing.
 
-Champions
-- These are the best customers, with the most recent and frequent purchases and with the most dollar spendings.
+- **Champions**: These are the best customers, with the most recent and frequent purchases and with the most dollar spendings.
 
-Loyal Customers
-- Customers who have made some less recent purchases and spend a little less than champions. But these customers have still made very recent and frequent purchases with sizeable spendings.
+- **Loyal Customers**: Customers who have made some less recent purchases and spend a little less than champions. But these customers have still made very recent and frequent purchases with sizeable spendings.
 
-Potential Loyalist
-- Customers who made recent purchases, but spent moderate amounts with moderate frequncy.
+- **Potential Loyalist**: Customers who made recent purchases, but spent moderate amounts with moderate frequency.
 
-New customers
-- Customers who made the most recent purchases, but have minimal frequency and spending.
+- **New Customers**: Customers who made the most recent purchases, but have minimal frequency and spending.
 
-Promising
-- Customers who made very recent purchases but have spent have low frequency and spending.
+- **Promising**: Customers who made very recent purchases but have low frequency and spending.
 
-About To Sleep
-- Customers who have moderate spending but haven't made recent or frequenct purchases.
+- **About To Sleep**: Customers who have moderate spending but haven't made recent or frequent purchases.
 
-Hibernating
-- Customers who haven't made a purchase in while and have spent infrequently and little. They have probably churned.
+- **Hibernating**: Customers who haven't made a purchase in a while and have spent infrequently and little. They have probably churned.
 
-Can't Lose Them
-- Customers who haven't made recent purchases but have previously made frequent purchases with high spendings.
+- **Can't Lose Them**: Customers who haven't made recent purchases but have previously made frequent purchases with high spendings.
 
-At Risk
-- Customers who haven't made recent purchases but have lower spendings and frequent purchases than those under Can't Lose Them.
+- **At Risk**: Customers who haven't made recent purchases but have lower spendings and frequent purchases than those under Can't Lose Them.
 
-Needs Attention
-- Customers who have moderate frequency and spending, but it's been a while since they made a new purchase.
+- **Needs Attention**: Customers who have moderate frequency and spending, but it's been a while since they made a new purchase.
 
-Lost
-- Customers who have churned.
+- **Lost**: Customers who have churned.
 
 ![rfm_segment_count](https://github.com/user-attachments/assets/1d9bd0ca-d0c6-470a-94cc-d73edf45cbea)
 
-This is a plot of the number of members in each segment. Amazon had too few new or promising customers, so they weren't shown on the plot. This is probably due to Amazon being an established giant in E-commerce. However, even though Amazon has a large number of Loyal Customers and Champions, there are larger number of customers who may be starting to churn.
+- Amazon had few new/promising customers, so they weren't shown on the plot. This should not come as a surprise since Amazon is an established giant in E-commerce. 
+- There are a large number of Loyal Customers and Champions, but there are even more customers who may be starting to churn.
 
 # Recommendations for RFM Segments
 - Customers who are in the About to Sleep, Needs Attention, At Risk, and Can't Lose Them segments should be targeted with discounts and promotions. These could be showing discounted products in their product recommendations (on the front page) or Amazon could offer these customers a month of free Amazon Prime through a message or email.
