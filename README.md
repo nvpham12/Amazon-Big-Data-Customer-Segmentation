@@ -31,22 +31,15 @@ Technical implementation is documented in two separate Jupyter Notebooks:
 
 # Executive Summary
 ## Insights
-- Some customer segments appear inconsistently placed within clusters (e.g., Champions grouped with One-Time Big Spenders, or Lost customers under New Customers), suggesting imperfect alignment between RFM segmentation and K-Means clustering.
-- These inconsistencies may indicate that the chosen number of clusters (k=4) is insufficient or that K-Means is not capturing the underlying structure well.
-- A large portion of customers fall under churn-related segments (e.g., About to Sleep, Hibernating, Lost), highlighting opportunities for re-engagement and retention strategies.
+- Some customer segments appear to be incorrectly placed within clusters (e.g., Champions grouped with One-Time Big Spenders, or Lost customers under New Customers), suggesting imperfect alignment between RFM segmentation and K-Means clustering.
+- Considering the K-Means Clustering has a poor Silhouette Score, it may be making poor predictions and causing the irregularities. These inconsistencies may indicate that the chosen number of clusters (k=4) is insufficient or that the K-Means algorithm is not capturing the underlying structure of the data.
+- Most of Amazon's customers fall under churn-related segments (e.g., About to Sleep, Hibernating, Lost), highlighting opportunities for targeted re-engagement and retention strategies.
 
-## Recommendations for K-Means Cluster Segments
-- New customers should also be targeted with a month of free Amazon Prime if they don't have a subscription already.  
-- Generally, marketing campaigns are launched to find New Customers and to try and reach out to Churned Customers to try and rekindle interest and get them to return.
-- Amazon could try launching an enhanced cash back program for Loyal Customers. Currently, Amazon offers cashback only to customers who make purchases using an Amazon Chase Visa. Amazon could try rolling out a cashback program to users without the Amazon credit card at lower rates such as 1% for all customers or 2% for customers with Prime. To prevent abuse, the cashback could be given to customers after the return periods for the item closes. Amazon could also try setting different cashback rates according to spending levels. One reference for this is Hilton's Honors Program which sets account levels of Member, Silver, Gold, and Diamond based on number of nights or stays.
-- Amazon could also try implementing a loyalty program providing points based on per dollar spending that can be exchanged for rewards. This would make Loyal Customers happy and could be attractive to New Customers.
-
-## Recommendations for RFM Segments
-- Customers who are in the About to Sleep, Needs Attention, At Risk, and Can't Lose Them segments should be targeted with discounts and promotions. These could be showing discounted products in their product recommendations (on the front page) or Amazon could offer these customers a month of free Amazon Prime through a message or email.
-- Promising customers should also be targeted with a month of free Amazon Prime if they don't have a subscription already.  
-- Generally, marketing campaigns are launched to find New Customers and to try and reach out to Hibernating and Lost customers to try and rekindle interest and get them to return.
-- For Champions, Loyal Customers, and Potential Loyalists Amazon could benefit from enhanced cash back programs. 
-- Amazon could also try implementing a loyalty program providing points based on per dollar spending that can be exchanged for rewards. This would make Champions and Loyal Customers happy and could be attractive to New Customers or Potential Loyalists.
+## Recommendations
+- Those in the **New Customers** cluster or in the **About to Sleep**, **Needs Attention**, **At Risk**, and **Can't Lose Them** segments should also be targeted with an offer of 1 month free/trial Amazon Prime if they don't have a subscription already and discounted items. This could be done by showing discounted products in their product recommendations (on the front page) or sending an email or message offering a month of free Amazon Prime.
+- Marketing campaigns should be launched to find **New Customers** and to reach out to **Churned Customers** in an attempt to rekindle interest.
+- Consider implementing a loyalty program providing points based on per dollar spending that can be exchanged for rewards could be implemented. This would reward **Loyal Customers**, potentially retain **New Customers**, and incentivize more customer spending.
+- Consider implementing an enhanced cash back program for Loyal Customers. Currently, Amazon offers cashback only to customers who make purchases using an Amazon Chase Visa. Amazon should consider rolling out a cashback program to users without the Amazon credit card at lower rates such as 1% for all customers or 2% for customers with Prime. To prevent abuse, the cashback could be given to customers after the return periods for the item closes. Amazon could also try setting different cashback rates according to spending levels such as Bronze, Silver, Gold, and Diamond tiers.
 
 ## Next Steps
 - Test additional cluster values (e.g., k=6–10) to evaluate whether deeper segmentation yields more interpretable or actionable groupings.
