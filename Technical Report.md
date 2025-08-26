@@ -34,13 +34,20 @@ The data was first extracted from the [source](https://huggingface.co/datasets/M
 
 # Exploratory Data Analysis (EDA)
 Before modeling, exploratory SQL queries and visualizations were conducted to better understand product and review dynamics:
-- Identified misplaced product categories and invalid rating values that required cleaning.
+- Identified misplaced product categories and invalid rating values that required cleaning through exploratory querying.
+- Visualized Most Reviewed Products.
+- Visualized Rating Distrubtion.
+
 ![2023_popular_products](https://github.com/user-attachments/assets/2c738685-86dd-4cf9-9e15-a9a735bede04)
-> Top 20 most-reviewed products in 2023
+- In this project, product popularity is approximated using the number of user reviews as a proxy.
+- Small electronic devices were the most popular in 2023. Wireless audio devices (earbuds/headphones) were by far the most popular.
+- Other popular electronics in 2023 were flash drives and various home improvement products such as cameras and Echo Dots.
 
 ---
 ![rating_distribution](https://github.com/user-attachments/assets/a686da60-1d6a-4fb6-999b-7f49dfa784f8)
-> 2023 Rating Distribution
+- Surprisingly, most product reviews come from users with verified purchases. This was unexpected given that there is no cost requirement for a user to make a review without a verified purchase.
+- Users have a tendency to leave ratings at the extreme values (1 and 5).
+- Most reviews are 5 star reviews, indicating that users tend to leave a review when they are satisfied with a product.
 
 # Data Cleaning
 - Converted missing value strings such as 'none' and 'n/a' into nulls.
@@ -92,13 +99,7 @@ Clusters were labeled based on analysis of the average values for each RFM metri
 # K-Means Clustering Validation
 - The clusters are not significantly imbalanced and cluster sizes are acceptable.
 - The Silhouette Score for the clustering is around 0.49, which is moderate clustering quality and indicates room for improvement.
-- The true optimal k may have been of higher values like 8 or 10, but those were not tested due to being computationally demanding and the marketing norm is to select between a k from 2 to 6.
-
-# Recommendations for K-Means Cluster Segments
-- New customers should also be targeted with a month of free Amazon Prime if they don't have a subscription already.  
-- Generally, marketing campaigns are launched to find New Customers and to try and reach out to Churned Customers to try and rekindle interest and get them to return.
-- Amazon could try launching an enhanced cash back program for Loyal Customers. Currently, Amazon offers cashback only to customers who make purchases using an Amazon Chase Visa. Amazon could try rolling out a cashback program to users without the Amazon credit card at lower rates such as 1% for all customers or 2% for customers with Prime. To prevent abuse, the cashback could be given to customers after the return periods for the item closes. Amazon could also try setting different cashback rates according to spending levels. One reference for this is Hilton's Honors Program which sets account levels of Member, Silver, Gold, and Diamond based on number of nights or stays.
-- Amazon could also try implementing a loyalty program providing points based on per dollar spending that can be exchanged for rewards. This would make Loyal Customers happy and could be attractive to New Customers.
+- The true optimal k may have been a higher value like 8 or 10, but such values were not tested due to high computational requirements and runtime. Common practice is said to be picking a value for k between 2 to 6.
 
 # RFM Segments
 In addition to K-Means, customers could also be segmented using RFM metrics. The method is to set rules or thresholds based on RFM scores and assign the customer to a segment. The following are some common marketing labels that will be used in this project:
@@ -132,19 +133,19 @@ The customers have been segmented according to their RFM scores using common lab
 - Amazon had few new/promising customers, so they weren't shown on the plot. This should not come as a surprise since Amazon is an established giant in E-commerce. 
 - There are a large number of Loyal Customers and Champions, but there are even more customers who may be starting to churn.
 
-# Recommendations for RFM Segments
-- Customers who are in the About to Sleep, Needs Attention, At Risk, and Can't Lose Them segments should be targeted with discounts and promotions. These could be showing discounted products in their product recommendations (on the front page) or Amazon could offer these customers a month of free Amazon Prime through a message or email.
-- Promising customers should also be targeted with a month of free Amazon Prime if they don't have a subscription already.  
-- Generally, marketing campaigns are launched to find New Customers and to try and reach out to Hibernating and Lost customers to try and rekindle interest and get them to return.
-- For Champions, Loyal Customers, and Potential Loyalists Amazon could benefit from enhanced cash back programs. 
-- Amazon could also try implementing a loyalty program providing points based on per dollar spending that can be exchanged for rewards. This would make Champions and Loyal Customers happy and could be attractive to New Customers or Potential Loyalists.
+# Executive Summary
+## Insights
+- Some customer segments appear to be incorrectly placed within clusters (e.g., **Champions** grouped with **One-Time Big Spenders**, or **Lost customers** under **New Customers**), suggesting imperfect alignment between RFM segmentation and K-Means clustering.
+- Considering the K-Means Clustering has a poor Silhouette Score, it may be making poor predictions and causing the irregularities. These inconsistencies may indicate that the chosen number of clusters (k=4) is insufficient or that the K-Means algorithm is not capturing the underlying structure of the data.
+- Most of Amazon's customers fall under churn-related segments (e.g., **About to Sleep**, **Hibernating**, **Lost**), highlighting opportunities for targeted re-engagement and retention strategies.
 
-# Insights
-- Some customer segments appear inconsistently placed within clusters (e.g., Champions grouped with One-Time Big Spenders, or Lost customers under New Customers), suggesting imperfect alignment between RFM segmentation and K-Means clustering.
-- These inconsistencies may indicate that the chosen number of clusters (k=4) is insufficient or that K-Means is not capturing the underlying structure well.
-- A large portion of customers fall under churn-related segments (e.g., About to Sleep, Hibernating, Lost), highlighting opportunities for re-engagement and retention strategies.
+## Recommendations
+- Those in the **New Customers** cluster or in the **About to Sleep**, **Needs Attention**, **At Risk**, and **Can't Lose Them** segments should also be targeted with an offer of 1 month free/trial Amazon Prime if they don't have a subscription already and discounted items. This could be done by showing discounted products in their product recommendations (on the front page) or sending an email or message offering a month of free Amazon Prime.
+- Marketing campaigns should be launched to find **New Customers** and to reach out to **Churned Customers** in an attempt to rekindle interest.
+- Consider implementing a loyalty program providing points based on per dollar spending that can be exchanged for rewards could be implemented. This would reward **Loyal Customers**, potentially retain **New Customers**, and incentivize more customer spending.
+- Consider implementing an enhanced cash back program for Loyal Customers. Currently, Amazon offers cashback only to customers who make purchases using an Amazon Chase Visa. Amazon should consider rolling out a cashback program to users without the Amazon credit card at lower rates such as 1% for all customers or 2% for customers with Prime. To prevent abuse, the cashback could be given to customers after the return periods for the item closes. Amazon could also try setting different cashback rates according to spending levels such as Bronze, Silver, Gold, and Diamond tiers.
 
-# Next Steps
+## Next Steps
 - Test additional cluster values (e.g., k=6–10) to evaluate whether deeper segmentation yields more interpretable or actionable groupings.
 - Develop a predictive churn model using supervised learning to identify at-risk customers based on historical behavior.
 - Perform sentiment analysis on review text and map sentiment trends to customer segments for richer behavioral insight.
