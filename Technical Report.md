@@ -1,6 +1,7 @@
-# Project Overview
+# Project Background
 This project focuses on customer segmentation using big data from Amazon electronics product reviews. It integrates product metadata with customer review data using Spark SQL joins and applies feature engineering and unsupervised learning to identify behavioral customer segments.
 
+## Approach
 The project includes an end-to-end workflow: 
 - ETL
 - Exploratory analysis and data cleaning with PySpark
@@ -12,28 +13,32 @@ Technical implementation is documented in two separate Jupyter Notebooks:
 - **EDA Notebook** – for exploration, SQL querying, and data profiling  
 - **Modeling Notebook** – for feature engineering, clustering, and segment interpretation
 
-# Tools & Technologies
+## Tools & Technologies
 - **PySpark** – for distributed data cleaning, joining, and feature engineering
 - **Spark SQL** – for scalable querying, including complex joins and aggregations
 - **MLlib** – for K-Means clustering and unsupervised segmentation
 - **Pandas, Matplotlib, Seaborn** – for additional analysis and visualization, using colorblind-friendly templates
 
-# Data
-The dataset contains information Amazon product user reviews and item metadata between May 1996 to September 2023. The data was scraped from Amazon by McAuley Lab at UC San Diego. While there are other product categories available, this project will use electronics product data.
+## Data
+- The dataset contains information Amazon product user reviews and item metadata between May 1996 to September 2023. 
+- The data was scraped from Amazon by McAuley Lab at UC San Diego. While there are other product categories available, this project will use electronics product data.
 
-# ETL Process
+## Links
+- [EDA Jupyter Notebook](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/EDA_Amazon_Big_Data.ipynb)
+- [Segmentation Machine Learning Model Jupyter Notebook](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/Customer_Segmentation_Amazon_Big%20Data.ipynb)
+
+# ETL
 The data was first extracted from the [source](https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023) using Hugging Face's datasets library, then converted into parquet storage format. McAuley Lab scraped the data from Amazon. The transformation to parquet was required as the data was too large for Pandas, direct PySpark dataframe creation, or arrow tables. The parquet files were then read into PySpark.
 
 # Exploratory Data Analysis (EDA)
 Before modeling, exploratory SQL queries and visualizations were conducted to better understand product and review dynamics:
 - Identified misplaced product categories and invalid rating values that required cleaning.
-- Found the top 20 most-reviewed products in 2023 to explore customer engagement patterns.
-
 ![2023_popular_products](https://github.com/user-attachments/assets/2c738685-86dd-4cf9-9e15-a9a735bede04)
+> Top 20 most-reviewed products in 2023
 
-- Visualized the 2023 rating distribution to assess customer satisfaction trends.
-
+---
 ![rating_distribution](https://github.com/user-attachments/assets/a686da60-1d6a-4fb6-999b-7f49dfa784f8)
+> 2023 Rating Distribution
 
 # Data Cleaning
 - Converted missing value strings such as 'none' and 'n/a' into nulls.
