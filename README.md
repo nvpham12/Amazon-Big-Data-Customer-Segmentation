@@ -1,6 +1,7 @@
-# Project Overview
+# Project Background
 This project focuses on customer segmentation using big data from Amazon electronics product reviews. It integrates product metadata with customer review data using Spark SQL joins and applies feature engineering and unsupervised learning to identify behavioral customer segments.
 
+## Approach
 The project includes an end-to-end workflow: 
 - ETL
 - Exploratory analysis and data cleaning with PySpark
@@ -12,15 +13,20 @@ Technical implementation is documented in two separate Jupyter Notebooks:
 - **EDA Notebook** – for exploration, SQL querying, and data profiling  
 - **Modeling Notebook** – for feature engineering, clustering, and segment interpretation
 
-# Tools & Technologies
+## Tools & Technologies
 - **PySpark** – for distributed data cleaning, joining, and feature engineering
 - **Spark SQL** – for scalable querying, including complex joins and aggregations
 - **MLlib** – for K-Means clustering and unsupervised segmentation
 - **Pandas, Matplotlib, Seaborn** – for additional analysis and visualization, using colorblind-friendly templates
 
-# Data
+## Data
 - The dataset contains information Amazon product user reviews and item metadata between May 1996 to September 2023. 
 - The data was scraped from Amazon by McAuley Lab at UC San Diego. While there are other product categories available, this project will use electronics product data.
+
+## Links
+- [EDA Jupyter Notebook](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/EDA_Amazon_Big_Data.ipynb)
+- [Segmentation Machine Learning Model Jupyter Notebook](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/Customer_Segmentation_Amazon_Big%20Data.ipynb)
+- [Technical Report](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/Technical%20Report.md)
 
 # Executive Summary
 ## Insights
