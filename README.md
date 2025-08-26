@@ -27,7 +27,7 @@ Technical implementation is documented in two separate Jupyter Notebooks:
 ## Links
 - [EDA Jupyter Notebook](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/EDA_Amazon_Big_Data.ipynb)
 - [Segmentation Machine Learning Model Jupyter Notebook](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/Customer_Segmentation_Amazon_Big%20Data.ipynb)
-- [Technical Report](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/Technical%20Report.md)
+- [Full Technical Report](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/Technical%20Report.md)
 
 # Executive Summary
 ## Insights
