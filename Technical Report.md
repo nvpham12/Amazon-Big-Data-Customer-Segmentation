@@ -145,6 +145,6 @@ In addition to K-Means, customers could also be segmented using RFM metrics. The
 - Consider implementing an enhanced cash back program for **Loyal Customers** and **Champions**. Currently, Amazon offers cashback only to customers who make purchases using an Amazon Chase Visa. Amazon should consider rolling out a cashback program to users without the Amazon credit card at lower rates such as 1% for all customers or 2% for customers with Prime. To prevent abuse, the cashback could be given to customers after the return periods for the item closes. Amazon could also try setting different cashback rates according to spending levels such as Bronze, Silver, Gold, and Diamond tiers.
 
 ## Next Steps
-- Test higher numbers of clusters to evaluate whether deeper segmentation yields more interpretable or actionable groupings with K-Means Clustering.
-- Explore other algorithms for customer segmentation and compare their performance with K-Means Clustering.
+- Test the K-Means model with more clusters to evaluate whether deeper segmentation yields more interpretable or actionable groupings.
+- Explore other algorithms for customer segmentation and compare their performance with the K-Means model.
 - Perform sentiment analysis on review text and map sentiment trends to customer segments for richer behavioral insight.
