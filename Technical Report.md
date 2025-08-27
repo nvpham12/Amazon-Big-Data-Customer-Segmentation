@@ -1,5 +1,5 @@
 # Project Background
-This project focuses on customer segmentation using big data from Amazon electronics product reviews. It integrates product metadata with customer review data using Spark SQL joins and applies feature engineering and unsupervised learning to identify behavioral customer segments.
+This project focuses on customer segmentation using big data from Amazon electronics product reviews. It integrates product metadata with customer review data using PySpark and Spark SQL joins, applying feature engineering and unsupervised learning to identify behavioral customer segments.
 
 ## Approach
 The project includes an end-to-end workflow: 
@@ -7,11 +7,12 @@ The project includes an end-to-end workflow:
 - Exploratory analysis and data cleaning with PySpark
 - Feature engineering using RFM (Recency, Frequency, Monetary) metrics
 - Clustering via K-Means using MLlib
+- RFM segmentation
 - Business recommendations based on both cluster and RFM analysis
 
 Technical implementation is documented in two separate Jupyter Notebooks:  
-- **EDA Notebook** – for exploration, SQL querying, and data profiling  
-- **Modeling Notebook** – for feature engineering, clustering, and segment interpretation
+- **EDA Jupyter Notebook** – for exploration, SQL querying, data profiling and cleaning  
+- **Modeling JupyterNotebook** – for feature engineering, clustering, and segment interpretation
 
 ## Tools & Technologies
 - **PySpark** – for distributed data cleaning, joining, and feature engineering
@@ -22,8 +23,8 @@ Technical implementation is documented in two separate Jupyter Notebooks:
 ## Data
 - The dataset contains information Amazon product user reviews and item metadata between May 1996 to September 2023.
 - The data was scraped from Amazon by [McAuley Lab at UC San Diego.](https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023) While there are other product categories available, this project will use electronics product data.
-- The dataset contains 43,886,944 rows and 10 columns in the product reviews dataset and 1,610,012 rows and 16 columns in the product metadata dataset.
-
+- The product reviews dataset has 43,886,944 rows and 10 columns.
+- The product metadata dataset has 1,610,012 rows and 16 columns.
 
 ## Links
 - [EDA Jupyter Notebook](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/EDA_Amazon_Big_Data.ipynb)
@@ -33,13 +34,10 @@ Technical implementation is documented in two separate Jupyter Notebooks:
 The data was first extracted from the [source](https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023) using Hugging Face's datasets library, then converted into parquet storage format. McAuley Lab scraped the data from Amazon. The transformation to parquet was required as the data was too large for Pandas, direct PySpark dataframe creation, or arrow tables. The parquet files were then read into PySpark.
 
 # Exploratory Data Analysis (EDA)
-Before modeling, exploratory SQL queries and visualizations were conducted to better understand product and review dynamics:
-- Identified misplaced product categories and invalid rating values that required cleaning through exploratory querying.
-- Visualized Most Reviewed Products.
-- Visualized Rating Distrubtion.
+Before modeling, exploratory SQL queries and visualizations were conducted to better understand product and review dynamics. Misplaced product categories and invalid rating values were discovered and cleaned.
 
 ![2023_popular_products](https://github.com/user-attachments/assets/2c738685-86dd-4cf9-9e15-a9a735bede04)
-- In this project, product popularity is approximated using the number of user reviews as a proxy.
+> In this project, product popularity is approximated using the number of user reviews as a proxy.
 - Small electronic devices were the most popular in 2023. Wireless audio devices (earbuds/headphones) were by far the most popular.
 - Other popular electronics in 2023 were flash drives and various home improvement products such as cameras and Echo Dots.
 
@@ -52,12 +50,12 @@ Before modeling, exploratory SQL queries and visualizations were conducted to be
 # Data Cleaning
 - Converted missing value strings such as 'none' and 'n/a' into nulls.
 - Dropped duplicates.
-- Filtered data to last 2 years of observations and only reviews with verified purchases.
+- Filtered data to last 2 years of observations (2022 and 2023) and only reviews with verified purchases.
 - Removed incorrect observations and columns.
 - Converted data types to proper format such as timestamp to seconds and price to double (a type of integer in PySpark).
 
 # Feature Engineering
-Recency, Frequency, and Monetary (RFM) metrics will be used as the features for the model. Since we do not have customer purchase dates in the data, the traditional RFM metrics can't be obtained. However, a work around is to use review date as a proxy for purchase time. Because the data includes an indicator for verified purchases, reviewers can be screened to find verified customers. The RFM features in this project will be represented as follows:
+Recency, Frequency, and Monetary (RFM) metrics will be used as the features for the model. Since the data does not contain customer purchase dates, the traditional RFM metrics cannot be obtained. However, a work around is to use review date as a proxy for purchase time. Because the data includes an indicator for verified purchases, reviewers can be screened to find verified customers. The RFM features in this project will be represented as follows:
 - Recency will measure how recent the review left by the customer is as a proxy for how recent a customer made a purchase.
 - Frequency will measure how often a customer leaves reviews as a proxy for how often a customer made purchases.
 - Monetary will measure how much a customer spends based on prices of the product they reviewed.
@@ -69,7 +67,7 @@ Analysis is subject to the following limitations:
 - The monetary feature is based on the price of the product reviewed, which may not perfectly reflect the price paid for the product. Products can change in price over time (or receive discounts), which isn't accounted for when scraping the data.
 
 # Data Preprocessing
-- The data is filtered further to a 1 year range between 9/13/2022 to 9/13/2023 based on the date of the most recent review.
+- The data is filtered further to a 1 year range between 9/13/2022 to 9/13/2023 based on the date of the most recent review in the data.
 - Applied a log transformation on skewed features.
 - Scaled the data using Standard Scaler.
 
@@ -79,32 +77,33 @@ The model will use K-Means Clustering, an unsupervised machine learning algorith
 ## Elbow Method
 ![wcss_elbow](https://github.com/user-attachments/assets/c30687ac-34f8-4e9c-8390-744c6dd61dec)
 - The Elbow Method involves plotting within-cluster sum of squares (WCSS) against k and looking for the elbow, the point where the curve forms a kink or angle at some k.
-- The angles appear in the curve at values of 3 and 4 for k. Since the curve appears linear after 4, k=4 is the better option.
+- The angles appear in the curve at values of 3 and 4 for k.
+- Since the curve appears linear after 4, choosing $k=4$ is the better option per Elbow Method guidlines.
 
 ## Silhouette Method
 ![silhoutte_score](https://github.com/user-attachments/assets/82dfa82a-c228-41d0-ab94-b378bad8cd7a)
-- The value of k with the highest Silhouette Score is 2.
-- The Silhouette Scores for k=4 and k=6 are not too far off from the score for k=2. 
+- The value of $k$ with the highest Silhouette Score is 2.
+- The Silhouette Scores where $k=4$ and $k=6$ are lower, but not too far off from the score for $k=2$.
+- Choosing $k=2$ would be best, but $k=4$ and $k=6$ can be chosen as well per Silhouette Method guidelines.
 
 ## Choice of k Clusters
-From analysis of results from both methods, we would choose k=4, since it is the best choice from the Elbow Method and the Silhouette Score is not too far off from the highest score at k=2.
+From analysis of results from both methods, we would choose $k=4$ clusters, since it is the best choice from the Elbow Method and the Silhouette Score is not too far off from the highest score at $k=2$.
 
 # K-Means Cluster Segments
 Clusters were labeled based on analysis of the average values for each RFM metric in each cluster. The 4 clusters are Churned, New Customers, Loyal Customers, and One Time Big Spenders. 
 
 ![segment_pie](https://github.com/user-attachments/assets/695491ee-89f4-48f9-8c35-3beee28d7890)
-- New customers make up around 30% of the total customers. 
-- The churned and one time big spenders combine to around half the total customers.
+- **New Customers** make up around 30% of the total customers. 
+- **Churned Customers** and **One Time Big Spenders** sum up to around half the total customers.
+- **Loyal Customers** make up 15% of total customers and is the segment with the fewest customers.
 
 # K-Means Clustering Validation
 - The clusters are not significantly imbalanced and cluster sizes are acceptable.
 - The Silhouette Score for the clustering is around 0.49, which is moderate clustering quality and indicates room for improvement.
-- The true optimal k may have been a higher value like 8 or 10, but such values were not tested due to high computational requirements and runtime. Common practice is said to be picking a value for k between 2 to 6.
+- The true optimal k may have been a higher value like 8 or 10, but such values were not tested due to high computational requirements and runtime. Common practice is said to be picking a value for $k$ between 2 to 6.
 
 # RFM Segments
-In addition to K-Means, customers could also be segmented using RFM metrics. The method is to set rules or thresholds based on RFM scores and assign the customer to a segment. The following are some common marketing labels that will be used in this project:
-
-The customers have been segmented according to their RFM scores using common labels in marketing.
+In addition to K-Means, customers could also be segmented using RFM metrics. The method is to set rules or thresholds based on RFM scores and assign the customer to a segment. The customers have been segmented according to their RFM scores using common labels in marketing as follows:
 
 - **Champions**: These are the best customers, with the most recent and frequent purchases and with the most dollar spendings.
 
@@ -130,8 +129,8 @@ The customers have been segmented according to their RFM scores using common lab
 
 ![rfm_segment_count](https://github.com/user-attachments/assets/1d9bd0ca-d0c6-470a-94cc-d73edf45cbea)
 
-- Amazon had few new/promising customers, so they weren't shown on the plot. This should not come as a surprise since Amazon is an established giant in E-commerce. 
-- There are a large number of Loyal Customers and Champions, but there are even more customers who may be starting to churn.
+- Amazon had few **New Customers** and **Promising Customers**, so they weren't shown on the plot. This should not come as a surprise since Amazon is an established giant in E-commerce. 
+- There are a large number of **Loyal Customers** and **Champions**, but there are even more customers who may be starting to churn.
 
 # Executive Summary
 ## Insights
@@ -146,6 +145,6 @@ The customers have been segmented according to their RFM scores using common lab
 - Consider implementing an enhanced cash back program for Loyal Customers. Currently, Amazon offers cashback only to customers who make purchases using an Amazon Chase Visa. Amazon should consider rolling out a cashback program to users without the Amazon credit card at lower rates such as 1% for all customers or 2% for customers with Prime. To prevent abuse, the cashback could be given to customers after the return periods for the item closes. Amazon could also try setting different cashback rates according to spending levels such as Bronze, Silver, Gold, and Diamond tiers.
 
 ## Next Steps
-- Test additional cluster values (e.g., k=6–10) to evaluate whether deeper segmentation yields more interpretable or actionable groupings.
+- Test higher numbers of clusters (higher values for $k$) to evaluate whether deeper segmentation yields more interpretable or actionable groupings.
 - Develop a predictive churn model using supervised learning to identify at-risk customers based on historical behavior.
 - Perform sentiment analysis on review text and map sentiment trends to customer segments for richer behavioral insight.
