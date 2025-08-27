@@ -6,13 +6,13 @@ The project includes an end-to-end workflow:
 - ETL
 - Exploratory analysis and data cleaning with PySpark
 - Feature engineering using RFM (Recency, Frequency, Monetary) metrics
-- Clustering via K-Means using MLlib
-- RFM segmentation
+- K-Means Clustering using MLlib
+- RFM rule-based segmentation
 - Business recommendations based on both cluster and RFM analysis
 
 Technical implementation is documented in two separate Jupyter Notebooks:  
 - **EDA Jupyter Notebook** – for exploration, SQL querying, data profiling and cleaning  
-- **Modeling JupyterNotebook** – for feature engineering, clustering, and segment interpretation
+- **Modeling Jupyter Notebook** – for feature engineering, clustering, and segment interpretation
 
 ## Tools & Technologies
 - **PySpark** – for distributed data cleaning, joining, and feature engineering
@@ -100,7 +100,7 @@ Clusters were labeled based on analysis of the average values for each RFM metri
 # K-Means Clustering Validation
 - The clusters are not significantly imbalanced and cluster sizes are acceptable.
 - The Silhouette Score for the clustering is around 0.49, which is moderate clustering quality and indicates room for improvement.
-- The true optimal k may have been a higher value like 8 or 10, but such values were not tested due to high computational requirements and runtime. Common practice is said to be picking a value for $k$ between 2 to 6.
+- The true optimal k may have been a higher value like 8 or 10, but such values were not tested due to high computational requirements and runtime. Common practice is to select a value for $k$ between 2 to 6.
 
 # RFM Segments
 In addition to K-Means, customers could also be segmented using RFM metrics. The method is to set rules or thresholds based on RFM scores and assign the customer to a segment. The customers have been segmented according to their RFM scores using common labels in marketing as follows:
@@ -135,16 +135,16 @@ In addition to K-Means, customers could also be segmented using RFM metrics. The
 # Executive Summary
 ## Insights
 - Some customer segments appear to be incorrectly placed within clusters (e.g., **Champions** grouped with **One-Time Big Spenders**, or **Lost customers** under **New Customers**), suggesting imperfect alignment between RFM segmentation and K-Means clustering.
-- Considering the K-Means Clustering has a poor Silhouette Score, it may be making poor predictions and causing the irregularities. These inconsistencies may indicate that the chosen number of clusters (k=4) is insufficient or that the K-Means algorithm is not capturing the underlying structure of the data.
-- Most of Amazon's customers fall under churn-related segments (e.g., **About to Sleep**, **Hibernating**, **Lost**), highlighting opportunities for targeted re-engagement and retention strategies.
+- Considering the K-Means Clustering Model has moderate values for its performance metrics, it may be making poor predictions and causing these irregularities. This may indicate that the chosen number of clusters ($k=4$) is insufficient or that the K-Means algorithm is not suitable for the data.
+- Most of Amazon's customers fall under churn-related segments (e.g., **About to Sleep**, **Hibernating**, **Lost**), highlighting opportunities and urgency for targeted re-engagement and retention strategies.
 
 ## Recommendations
-- Those in the **New Customers** cluster or in the **About to Sleep**, **Needs Attention**, **At Risk**, and **Can't Lose Them** segments should also be targeted with an offer of 1 month free/trial Amazon Prime if they don't have a subscription already and discounted items. This could be done by showing discounted products in their product recommendations (on the front page) or sending an email or message offering a month of free Amazon Prime.
+- Those in the **New Customers** cluster or in the **About to Sleep**, **Needs Attention**, **At Risk**, and **Can't Lose Them** segments should also be targeted with an offer of 1 month free and/or trial Amazon Prime if they don't have a subscription already and discounted items. This could be done by showing discounted products in their product recommendations (on the front page) or sending an email or message offering a month of free Amazon Prime.
 - Marketing campaigns should be launched to find **New Customers** and to reach out to **Churned Customers** in an attempt to rekindle interest.
-- Consider implementing a loyalty program providing points based on per dollar spending that can be exchanged for rewards could be implemented. This would reward **Loyal Customers**, potentially retain **New Customers**, and incentivize more customer spending.
-- Consider implementing an enhanced cash back program for Loyal Customers. Currently, Amazon offers cashback only to customers who make purchases using an Amazon Chase Visa. Amazon should consider rolling out a cashback program to users without the Amazon credit card at lower rates such as 1% for all customers or 2% for customers with Prime. To prevent abuse, the cashback could be given to customers after the return periods for the item closes. Amazon could also try setting different cashback rates according to spending levels such as Bronze, Silver, Gold, and Diamond tiers.
+- Consider implementing a loyalty program providing points based on per dollar spending that can be exchanged for rewards could be implemented. This would reward **Loyal Customers**, potentially retain **New Customers**, and encourage higher spending.
+- Consider implementing an enhanced cash back program for **Loyal Customers** and **Champions**. Currently, Amazon offers cashback only to customers who make purchases using an Amazon Chase Visa. Amazon should consider rolling out a cashback program to users without the Amazon credit card at lower rates such as 1% for all customers or 2% for customers with Prime. To prevent abuse, the cashback could be given to customers after the return periods for the item closes. Amazon could also try setting different cashback rates according to spending levels such as Bronze, Silver, Gold, and Diamond tiers.
 
 ## Next Steps
-- Test higher numbers of clusters (higher values for $k$) to evaluate whether deeper segmentation yields more interpretable or actionable groupings.
-- Develop a predictive churn model using supervised learning to identify at-risk customers based on historical behavior.
+- Test higher numbers of clusters to evaluate whether deeper segmentation yields more interpretable or actionable groupings with K-Means Clustering.
+- Explore other algorithms for customer segmentation and compare their performance with K-Means Clustering.
 - Perform sentiment analysis on review text and map sentiment trends to customer segments for richer behavioral insight.
