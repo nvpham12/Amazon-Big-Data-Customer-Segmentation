@@ -2,16 +2,18 @@
 This project demonstrates customer segmentation using Recency, Frequency, and Monetary (RFM) features. The data will be filtered down to only users who left reviews with verified purchases in 2022-2023, the most recently available time period in the data. 
 
 ## Links
-### EDA
-- []()
+### EDA Jupyter Notebook
+- [EDA Notebook](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/EDA%20Amazon%20Electronics%20Big%20Data.ipynb)
 
 ### K-Means Clustering
-- []()
-- []()
+- [K-Means Clustering Notebook](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/K-Means%20Clustering%20Notebook.ipynb)
+- [K-Means Clustering Technical Report](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/K-Means%20Clustering%20Technical%20Report.md)
 
 ### RFM Customer Segmentation
-- []()
-- []()
+- [RFM Segmentation Notebook](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/RFM%20Segmentation%20Amazon%20Electronics.ipynb)
+
+### Data Analytics
+- [Data Analytics Report](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/Data%20Analytics%20Report.md)
 
 ## Tools & Technologies
 - **PySpark**: distributed computing and big data manipulation
@@ -113,6 +115,7 @@ The customers are segmented to the following groups:
 
 # Visualization
 ## RFM Segment Counts
+<img width="1000" height="600" alt="rfm_segment_count_horizontal" src="https://github.com/user-attachments/assets/cc5a411e-9f99-4af9-b47f-335d52953ac9" />
 
 - The segments with the most customers are the **About to Sleep** and **Hibernating** segments, which is bad since these customers are at risk of churn or have churned already. About to Sleep customers haven't churned yet though and may be retained through business strategy.
 - The segments with the fewest customers are the **Can't Lose Them** and **At Risk** segments. This is good since a business would want those segments to be least populated.
@@ -121,6 +124,7 @@ The customers are segmented to the following groups:
 ---
 
 ## RFM Segment Pie
+<img width="800" height="800" alt="rfm_segment_pie" src="https://github.com/user-attachments/assets/5f065bd0-ff04-4408-bd7b-732fcc471d92" />
 
 - 36% of customers are regular or high value customers (**Champions**, **Loyalists**, and **Potential Loyalists**)
 - 33% of customers are at risk of churn but haven't churned yet (**About to Sleep**, **At Risk**, **Can't Lose Them**, and **Needs Attention**).
@@ -129,6 +133,7 @@ The customers are segmented to the following groups:
 ---
 
 ## Average Monetary Value by Segment
+<img width="1000" height="600" alt="avg_monetary_by_segment" src="https://github.com/user-attachments/assets/075bdf02-53bf-4dbd-9e75-5e205dbc48c2" />
 
 - Based on average Monetary value, customers in the **Can't Lose Them** and **About to Sleep** categories are high value customers that should be targeted for retention.
 - **Hibernating**, **Needs Attention**, and **At Risk** customers have the lowest average Monetary value.
@@ -136,6 +141,7 @@ The customers are segmented to the following groups:
 ---
 
 ## Total Monetary Value by Segment
+<img width="1000" height="600" alt="total_monetary_by_segment" src="https://github.com/user-attachments/assets/6cea748a-5386-459c-acaa-ca8a4c5bab33" />
 
 - Based on total Monetary value, customers in the **Champions** and **About to Sleep** segments contain the highest value customers.
 - **Hibernating**, **Needs Attention**, and **At Risk** customers have the lowest total Monetary value.
