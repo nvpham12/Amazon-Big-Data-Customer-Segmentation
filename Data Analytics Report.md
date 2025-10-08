@@ -2,15 +2,13 @@
 This project demonstrates distributed computing, querying, and customer segmentation on big data. K-Means Clustering and RFM (Recency, Frequency, Monetary) Analysis are used to group customers based on spending habits. The K-Means model had questionable performance, so segmentation based on RFM Analysis was done. Data analysis for this project are based on these RFM segments instead of the clusters.
 
 ## Links
-### EDA Jupyter Notebook
+### Notebooks
 - [EDA Notebook](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/EDA%20Amazon%20Electronics%20Big%20Data.ipynb)
-
-### K-Means Clustering
-- [K-Means Clustering Notebook](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/K-Means%20Clustering%20Notebook.ipynb)
 - [K-Means Clustering Technical Report](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/K-Means%20Clustering%20Technical%20Report.md)
-
-### RFM Customer Segmentation
 - [RFM Segmentation Notebook](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/RFM%20Segmentation%20Amazon%20Electronics.ipynb)
+
+### Reports
+- [K-Means Clustering Technical Report](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/K-Means%20Clustering%20Technical%20Report.md)
 - [RFM Segmentation Technical Report](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/RFM%20Segmentation%20Technical%20Report.md)
 
 ## RFM Features
@@ -22,19 +20,14 @@ In this project, the RFM features will represent the following:
 
 - **Monetary**: how much a customer spends based on prices of the product they reviewed.
 
-## Customer Segmentation
-The customers are segmented to the following groups:
-- **Champions**: These are the best customers, with the most recent and frequent purchases and with the most dollar spendings.
-- **Loyal Customers**: Customers who have made some less recent purchases and spend a little less than champions. But these customers have still made very recent and frequent purchases with sizeable spendings.
-- **Potential Loyalists**: Customers who made recent purchases, but spent moderate amounts with moderate frequncy.
-- **New customers**: Customers who made the most recent purchases, but have minimal frequency and spending.
-- **Promising**: Customers who made very recent purchases but have spent have low frequency and spending.
-- **About To Sleep**: Customers who have moderate spending but haven't made recent or frequenct purchases.
-- **Hibernating**: Customers who haven't made a purchase in while and have spent infrequently and little. They have probably churned.
-- **Can't Lose Them**: Customers who haven't made recent purchases but have previously made frequent purchases with high spendings.
-- **At Risk**: Customers who haven't made recent purchases but have lower spendings and frequent purchases than those under Can't Lose Them.
-- **Needs Attention**: Customers who have moderate frequency and spending, but it's been a while since they made a new purchase.
-- **Lost**: Customers who have churned.
+## Customer Segments
+| Segment Group          | Segments Included                               | Characteristics / Notes                                             |
+|------------------------|------------------------------------------------|--------------------------------------------------------------------|
+| **High Value / Active** | Champions, Loyal Customers, Potential Loyalists | Recent and frequent purchasers with high spending                  |
+| **New / Low Engagement** | New Customers, Promising                       | Very recent purchasers with low frequency and spending             |
+| **At Risk**             | About to Sleep, At Risk, Can’t Lose Them, Needs Attention | Customers at risk of churning; varying levels of engagement and spending |
+| **Churned / Inactive**  | Hibernating, Lost                               | Inactive or churned customers; low engagement and spending         |
+
 
 ---
 
@@ -118,5 +111,3 @@ Dataset: Amazon Reviews 2023
 Authors: McAuley Lab at University of California, San Diego
 
 Source: [Hugging Face Repository](https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023)
-
-Reference: Hou, Y., Li, J., He, Z., Yan, A., Chen, X., & McAuley, J. (2024). Bridging language and items for retrieval and recommendation. arXiv preprint arXiv:2403.03952. https://arxiv.org/abs/2403.03952
