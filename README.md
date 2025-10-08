@@ -52,6 +52,8 @@ This project and its analysis is subject to the following limitations:
 - 36% of customers are regular or high value customers (**Champions**, **Loyalists**, and **Potential Loyalists**)
 - 33% of customers are at risk of churn but haven't churned yet (**About to Sleep**, **At Risk**, **Can't Lose Them**, and **Needs Attention**).
 - 30% of customers have already churned (**Lost** and **Hibernating**).
+- Small electronic devices were the most popular in 2023. Wireless audio devices (earbuds/headphones) were by far the most popular.
+- Ratings tend to extremes, especially towards 5 star reviews.
 
 ## Recommendations
 - Customers in the **About to Sleep** and **Can't Lose Them** segments should be targeted with discounts and promotions. This could be done by showing discounted products in their product recommendations (on the front page) or offering these customers a 1-month trial of Amazon Prime.
@@ -59,6 +61,8 @@ This project and its analysis is subject to the following limitations:
 - Customers in the **Needs Attention** and **At Risk** segments require more careful consideration. They are at risk of churning, but have low average and total spending. The benefits of retaining them may not be worth the costs of doing so.
 - Marketing campaigns should be launched to find **New Customers** and reach **Hibernating** and **Lost** customers in an attempt to rekindle interest and get them to return.
 - Consider rewarding **Champions**, **Loyal Customers**, and **Potential Loyalists** for being good customers. Consider offering exclusive perks, discounts, or coupons to these customers. Or create some loyalty program based on spending, which may encourage more purchases from them.
+- Consider developing Amazon branded audio devices like earbuds and speakers. Continue development of Fire and Echo products.
+- Investigate 5 star reviews for any fake reviews.
 
 ---
 
