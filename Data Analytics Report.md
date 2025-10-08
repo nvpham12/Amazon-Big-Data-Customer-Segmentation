@@ -2,15 +2,16 @@
 This project demonstrates distributed computing, querying, and customer segmentation on big data. K-Means Clustering and RFM (Recency, Frequency, Monetary) Analysis are used to group customers based on spending habits. The K-Means model had questionable performance, so segmentation based on RFM Analysis was done. Data analysis for this project are based on these RFM segments instead of the clusters.
 
 ## Links
-### EDA
-- []()
+### EDA Jupyter Notebook
+- [EDA Notebook](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/EDA%20Amazon%20Electronics%20Big%20Data.ipynb)
 
 ### K-Means Clustering
-- []()
-- []()
+- [K-Means Clustering Notebook](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/K-Means%20Clustering%20Notebook.ipynb)
+- [K-Means Clustering Technical Report](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/K-Means%20Clustering%20Technical%20Report.md)
 
-### RFM Customer Segmentation Notebook
-- []()
+### RFM Customer Segmentation
+- [RFM Segmentation Notebook](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/RFM%20Segmentation%20Amazon%20Electronics.ipynb)
+- [RFM Segmentation Technical Report](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/RFM%20Segmentation%20Technical%20Report.md)
 
 ## RFM Features
 Recency, Frequency, and Monetary (RFM) analysis is a method commonly used in marketing and analytics to segment or analyze customers. 
@@ -55,6 +56,8 @@ The customers are segmented to the following groups:
 ---
 
 ## RFM Segment Counts
+<img width="1000" height="600" alt="rfm_segment_count" src="https://github.com/user-attachments/assets/c1e6f055-0cb3-4799-af52-3aae7a9db69c" />
+
 
 - The segments with the most customers are the **About to Sleep** and **Hibernating** segments, which is bad since these customers are at risk of churn or have churned already. About to Sleep customers haven't churned yet though and may be retained through business strategy.
 - The segments with the fewest customers are the **Can't Lose Them** and **At Risk** segments. This is good since a business would want those segments to be least populated.
@@ -63,6 +66,7 @@ The customers are segmented to the following groups:
 ---
 
 ## RFM Segment Pie
+<img width="1000" height="600" alt="rfm_segment_pie" src="https://github.com/user-attachments/assets/5842a65a-881e-4dbd-b9ff-9e3f8817ed5d" />
 
 - 36% of customers are regular or high value customers (**Champions**, **Loyalists**, and **Potential Loyalists**)
 - 33% of customers are at risk of churn but haven't churned yet (**About to Sleep**, **At Risk**, **Can't Lose Them**, and **Needs Attention**).
@@ -71,6 +75,7 @@ The customers are segmented to the following groups:
 ---
 
 ## Average Monetary Value by Segment
+<img width="1000" height="600" alt="avg_monetary_by_segment" src="https://github.com/user-attachments/assets/075bdf02-53bf-4dbd-9e75-5e205dbc48c2" />
 
 - Based on average Monetary value, customers in the **Can't Lose Them** and **About to Sleep** categories are high value customers that should be targeted for retention.
 - **Hibernating**, **Needs Attention**, and **At Risk** customers have the lowest average Monetary value.
@@ -78,6 +83,7 @@ The customers are segmented to the following groups:
 ---
 
 ## Total Monetary Value by Segment
+<img width="1000" height="600" alt="total_monetary_by_segment" src="https://github.com/user-attachments/assets/6cea748a-5386-459c-acaa-ca8a4c5bab33" />
 
 - Based on total Monetary value, customers in the **Champions** and **About to Sleep** segments contain the highest value customers.
 - **Hibernating**, **Needs Attention**, and **At Risk** customers have the lowest total Monetary value.
@@ -93,6 +99,8 @@ The customers are segmented to the following groups:
 - 36% of customers are regular or high value customers (**Champions**, **Loyalists**, and **Potential Loyalists**)
 - 33% of customers are at risk of churn but haven't churned yet (**About to Sleep**, **At Risk**, **Can't Lose Them**, and **Needs Attention**).
 - 30% of customers have already churned (**Lost** and **Hibernating**).
+- Small electronic devices were the most popular in 2023. Wireless audio devices (earbuds/headphones) were by far the most popular.
+- Ratings tend to extremes, especially towards 5 star reviews.
 
 ## Recommendations
 - Customers in the **About to Sleep** and **Can't Lose Them** segments should be targeted with discounts and promotions. This could be done by showing discounted products in their product recommendations (on the front page) or offering these customers a 1-month trial of Amazon Prime.
@@ -100,7 +108,8 @@ The customers are segmented to the following groups:
 - Customers in the **Needs Attention** and **At Risk** segments require more careful consideration. They are at risk of churning, but have low average and total spending. The benefits of retaining them may not be worth the costs of doing so.
 - Marketing campaigns should be launched to find **New Customers** and reach **Hibernating** and **Lost** customers in an attempt to rekindle interest and get them to return.
 - Consider rewarding **Champions**, **Loyal Customers**, and **Potential Loyalists** for being good customers. Consider offering exclusive perks, discounts, or coupons to these customers. Or create some loyalty program based on spending, which may encourage more purchases from them.
-
+- Consider developing Amazon branded audio devices like earbuds and speakers. Continue development of Fire and Echo products.
+- Investigate 5 star reviews for any fake reviews.
 ---
 
 # Data Source
