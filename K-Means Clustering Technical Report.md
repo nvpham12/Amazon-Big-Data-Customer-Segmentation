@@ -34,14 +34,6 @@ This report focuses on the K-Means Clustering Model used for segmentation.
 - The product reviews dataset has 43,886,944 rows and 10 columns.
 - The product metadata dataset has 1,610,012 rows and 16 columns.
 
-## Limitations
-This project and its analysis is subject to the following limitations:
-- Reviews aren't necessarily left at time of purchase, but often left some time after the purchase.
-- Not everyone leaves a review (volunteer bias).
-- Frequency does not take into account purchases of multiple quantities.
-- The Monetary feature is based on the price of the product reviewed, which may not perfectly reflect the price paid for the product. Products can change in price over time (or receive discounts), which isn't accounted for in this project. The scrape will only take into account the price of the product when it was scraped from Amazon.
-- While this project uses verified customers, this pool of customers does not include all customers as not every customer leaves a review. However, analysis can still provide insights into the behavior of engaged and verified buyers, a valuable subset of the overall customer base.
-
 ---
 
 # Exploratory Data Analysis (EDA)
@@ -69,21 +61,38 @@ Before modeling, exploratory SQL queries and visualizations were conducted to be
 
 ---
 
-## Feature Engineering
-Recency, Frequency, and Monetary (RFM) metrics will be used as the features for the model. Since the data does not contain customer purchase dates, the traditional RFM metrics cannot be obtained. However, a work around is to use review date as a proxy for purchase time. Because the data includes an indicator for verified purchases, reviewers can be screened to find verified customers. The RFM features in this project will be represented as follows:
-- Recency will measure how recent the review left by the customer is as a proxy for how recent a customer made a purchase.
-- Frequency will measure how often a customer leaves reviews as a proxy for how often a customer made purchases.
-- Monetary will measure how much a customer spends based on prices of the product they reviewed.
+# RFM Features
+Recency, Frequency, and Monetary (RFM) analysis is a method commonly used in marketing and analytics to segment or analyze customers. RFM will be computed as features and used for customer segmentation in this project.
+Traditionally, the features represent the following:
 
-Analysis is subject to the following limitations:
-- Reviews aren't necessarily left at time of purchase, but often left some time after the purchase.
-- Not everyone leaves a review (volunteer bias).
-- Frequency does not account for purchases of multiple quantities.
-- The monetary feature is based on the price of the product reviewed, which may not perfectly reflect the price paid for the product. Products can change in price over time (or receive discounts), which isn't accounted for when scraping the data.
+- **Recency**: how recent a customer made a purchase.
+    
+- **Frequency**: how often a customer makes purchases.
+
+- **Monetary**: how much a customer spends.
+
+The RFM features will represent the following in this project:
+- **Recency**: how recent the review left by the customer is. 
+    
+- **Frequency**: how often a customer leaves reviews.
+
+- **Monetary**: how much a customer spends based on prices of the product they reviewed.
+
+# Project Limitations
+- **Volunteer bias**: Not all customers leave reviews; analysis reflects only engaged, reviewing customers.
+- **Frequency calculation**: Does not account for multiple quantities per purchase.
+- **Subset of reviewers**: Reviews are left by users and those who haven't made a verified purchase may not have bought the item being reviewed.
+    - **Mitigation** Only verified reviewers are included, ensuring that only verified customers are selected from users. Analysis focuses on this engaged subset.
+- **Review timing**: Reviews aren’t necessarily left at the time of purchase.
+    - **Mitigation**: Used review dates from verified customers as a proxy for purchase dates to compute recency.
+- **Monetary value estimation**: Prices of reviewed products may not reflect actual amounts paid due to discounts or price changes.
+    - **Mitigation**: Used product prices at the time of scraping as a proxy for spending.
+- **Missing purchase info**: Data lacks actual purchase amounts and dates.
+    - **Mitigation**: Review dates and product prices serve as proxies to approximate recency, frequency, and monetary features for RFM analysis.
 
 ---
 
-# Modeling
+# K-Means Clustering
  K-Means Clustering, an unsupervised machine learning algorithm. K-Means initializes a selected k number of points called means or centroids. It then finds the nearest distances between each data point the nearest centroid (using Euclidean distance) updating the positions of centroids. The process is repeated until we have unchanging centroids or cluster assignments, or until we have reached the maximum number of iterations. Before fitting the model, K needs to be chosen. 2 commonly used techniques for this are the Elbow Method and Silhouette Method.
 
 ## Data Preprocessing
