@@ -35,12 +35,10 @@ This project demonstrates distributed computing, querying, and customer segmenta
 - The product metadata contains 1,610,012 rows and 16 columns.
 
 ## Limitations
-This project and its analysis is subject to the following limitations:
-- Reviews aren't necessarily left at time of purchase, but often left some time after the purchase.
-- Not everyone leaves a review (volunteer bias).
-- Frequency does not take into account purchases of multiple quantities.
-- The Monetary feature is based on the price of the product reviewed, which may not perfectly reflect the price paid for the product. Products can change in price over time (or receive discounts), which isn't accounted for in this project. The scrape will only take into account the price of the product when it was scraped from Amazon.
-- While this project uses verified customers, this pool of customers does not include all customers as not every customer leaves a review. However, analysis can still provide insights into the behavior of engaged and verified buyers, a valuable subset of the overall customer base.
+- Review dates may not reflect actual purchase dates.
+- Not all customers leave reviews, creating potential volunteer bias.
+- Monetary values are based on product prices at scraping time, which may not reflect actual purchase prices.
+- Analysis focuses on verified reviewers, a subset of all customers.
 
 ---
 
@@ -52,17 +50,11 @@ This project and its analysis is subject to the following limitations:
 - 36% of customers are regular or high value customers (**Champions**, **Loyalists**, and **Potential Loyalists**)
 - 33% of customers are at risk of churn but haven't churned yet (**About to Sleep**, **At Risk**, **Can't Lose Them**, and **Needs Attention**).
 - 30% of customers have already churned (**Lost** and **Hibernating**).
-- Small electronic devices were the most popular in 2023. Wireless audio devices (earbuds/headphones) were by far the most popular.
-- Ratings tend to extremes, especially towards 5 star reviews.
 
 ## Recommendations
 - Customers in the **About to Sleep** and **Can't Lose Them** segments should be targeted with discounts and promotions. This could be done by showing discounted products in their product recommendations (on the front page) or offering these customers a 1-month trial of Amazon Prime.
 - Customers categorized as **Can't Lose Them** should be focused on, since they are at risk of churning and have high levels of spending.
 - Customers in the **Needs Attention** and **At Risk** segments require more careful consideration. They are at risk of churning, but have low average and total spending. The benefits of retaining them may not be worth the costs of doing so.
-- Marketing campaigns should be launched to find **New Customers** and reach **Hibernating** and **Lost** customers in an attempt to rekindle interest and get them to return.
-- Consider rewarding **Champions**, **Loyal Customers**, and **Potential Loyalists** for being good customers. Consider offering exclusive perks, discounts, or coupons to these customers. Or create some loyalty program based on spending, which may encourage more purchases from them.
-- Consider developing Amazon branded audio devices like earbuds and speakers. Continue development of Fire and Echo products.
-- Investigate 5 star reviews for any fake reviews.
 
 ---
 
@@ -72,5 +64,3 @@ Dataset: Amazon Reviews 2023
 Authors: McAuley Lab at University of California, San Diego
 
 Source: [Hugging Face Repository](https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023)
-
-Reference: Hou, Y., Li, J., He, Z., Yan, A., Chen, X., & McAuley, J. (2024). Bridging language and items for retrieval and recommendation. arXiv preprint arXiv:2403.03952. https://arxiv.org/abs/2403.03952
