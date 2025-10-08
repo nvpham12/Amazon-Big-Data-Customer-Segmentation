@@ -34,7 +34,7 @@ This project demonstrates customer segmentation using Recency, Frequency, and Mo
 - The product metadata contains 1,610,012 rows and 16 columns.
 
 ## RFM Features
-Recency, Frequency, and Monetary (RFM) analysis is a method commonly used in marketing and analytics to segment or analyze customers. 
+Recency, Frequency, and Monetary (RFM) analysis is a method commonly used in marketing and analytics to segment or analyze customers. RFM will be computed as features and used for customer segmentation in this project.
 Traditionally, the features represent the following:
 
 - **Recency**: how recent a customer made a purchase.
@@ -42,8 +42,6 @@ Traditionally, the features represent the following:
 - **Frequency**: how often a customer makes purchases.
 
 - **Monetary**: how much a customer spends.
-
-RFM will be computed as features and used for customer segmentation. Since the data does not include customer purchase dates, review dates will be used as a proxy for when a product was purchased. Because the data includes an indicator for verified purchases, we can screen whether reviewers are customers in the data. 
 
 The RFM features will represent the following in this project:
 - **Recency**: how recent the review left by the customer is. 
@@ -53,12 +51,16 @@ The RFM features will represent the following in this project:
 - **Monetary**: how much a customer spends based on prices of the product they reviewed.
 
 ## Project Limitations
-This project and its analysis is subject to the following limitations:
-- Reviews aren't necessarily left at time of purchase, but often left some time after the purchase.
-- Not everyone leaves a review (volunteer bias).
-- Frequency does not take into account purchases of multiple quantities.
-- The Monetary feature is based on the price of the product reviewed, which may not perfectly reflect the price paid for the product. Products can change in price over time (or receive discounts), which isn't accounted for in this project. The scrape will only take into account the price of the product when it was scraped from Amazon.
-- While this project uses verified customers, this pool of customers does not include all customers as not every customer leaves a review. However, analysis can still provide insights into the behavior of engaged and verified buyers, a valuable subset of the overall customer base.
+- **Volunteer bias**: Not all customers leave reviews; analysis reflects only engaged, reviewing customers.
+- **Frequency calculation**: Does not account for multiple quantities per purchase.
+- **Subset of reviewers**: Reviews are left by users and those who haven't made a verified purchase may not have bought the item being reviewed.
+    - **Mitigation** Only verified reviewers are included, ensuring that only verified customers are selected from users. Analysis focuses on this engaged subset.
+- **Review timing**: Reviews aren’t necessarily left at the time of purchase.
+    - **Mitigation**: Used review dates from verified customers as a proxy for purchase dates to compute recency.
+- **Monetary value estimation**: Prices of reviewed products may not reflect actual amounts paid due to discounts or price changes.
+    - **Mitigation**: Used product prices at the time of scraping as a proxy for spending.
+- **Missing purchase info**: Data lacks actual purchase amounts and dates.
+    - **Mitigation**: Review dates and product prices serve as proxies to approximate recency, frequency, and monetary features for RFM analysis.
 
 ---
 
