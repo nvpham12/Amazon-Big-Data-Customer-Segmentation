@@ -3,8 +3,18 @@ This project demonstrates distributed computing, querying, and customer segmenta
 This report focuses on the K-Means Clustering Model used for segmentation.
 
 ## Links
-- [EDA Jupyter Notebook]()
-- [K-Means Clustering Jupyter Notebook]()
+### EDA Jupyter Notebook
+- [EDA Notebook](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/EDA%20Amazon%20Electronics%20Big%20Data.ipynb)
+
+### K-Means Clustering
+- [K-Means Clustering Notebook](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/K-Means%20Clustering%20Notebook.ipynb)
+
+### RFM Customer Segmentation
+- [RFM Segmentation Notebook](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/RFM%20Segmentation%20Amazon%20Electronics.ipynb)
+- [RFM Segmentation Technical Report](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/RFM%20Segmentation%20Technical%20Report.md)
+
+### Data Analytics
+- [Data Analytics Report](https://github.com/nvpham12/Amazon-Big-Data-Customer-Segmentation/blob/main/Data%20Analytics%20Report.md)
 
 ## Tools & Technologies
 - **PySpark**: distributed computing and big data manipulation
@@ -110,6 +120,8 @@ Clusters were labeled based on analysis of the average values for each RFM metri
 - The true optimal k may have been a higher value like 8 or 10, but such values were not tested due to high computational requirements and runtime. Common practice is to select a value for $k$ between 2 to 6.
 
 ### Treemap
+<img width="1288" height="450" alt="cluster   segment treemap" src="https://github.com/user-attachments/assets/a7ae32c0-c49f-47d1-bf6d-2398034e4617" />
+
 - RFM segments (inner boxes) are mapped to clusters (outer boxes)
 - The RFM segments are placed into outer boxes that represent the K-Means Clusters. 
 - There are some odd placements into the K-Means Clusters. It could be that more clusters would be better such as 8 or 10. 
