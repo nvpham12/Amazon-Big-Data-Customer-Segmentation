@@ -115,7 +115,8 @@ The customers are segmented to the following groups:
 
 # Visualization
 ## RFM Segment Counts
-<img width="1000" height="600" alt="rfm_segment_count_horizontal" src="https://github.com/user-attachments/assets/cc5a411e-9f99-4af9-b47f-335d52953ac9" />
+<img width="1000" height="600" alt="rfm_segment_count" src="https://github.com/user-attachments/assets/c1e6f055-0cb3-4799-af52-3aae7a9db69c" />
+
 
 - The segments with the most customers are the **About to Sleep** and **Hibernating** segments, which is bad since these customers are at risk of churn or have churned already. About to Sleep customers haven't churned yet though and may be retained through business strategy.
 - The segments with the fewest customers are the **Can't Lose Them** and **At Risk** segments. This is good since a business would want those segments to be least populated.
@@ -124,7 +125,7 @@ The customers are segmented to the following groups:
 ---
 
 ## RFM Segment Pie
-<img width="800" height="800" alt="rfm_segment_pie" src="https://github.com/user-attachments/assets/5f065bd0-ff04-4408-bd7b-732fcc471d92" />
+<img width="1000" height="600" alt="rfm_segment_pie" src="https://github.com/user-attachments/assets/5842a65a-881e-4dbd-b9ff-9e3f8817ed5d" />
 
 - 36% of customers are regular or high value customers (**Champions**, **Loyalists**, and **Potential Loyalists**)
 - 33% of customers are at risk of churn but haven't churned yet (**About to Sleep**, **At Risk**, **Can't Lose Them**, and **Needs Attention**).
@@ -157,6 +158,8 @@ The customers are segmented to the following groups:
 - 36% of customers are regular or high value customers (**Champions**, **Loyalists**, and **Potential Loyalists**)
 - 33% of customers are at risk of churn but haven't churned yet (**About to Sleep**, **At Risk**, **Can't Lose Them**, and **Needs Attention**).
 - 30% of customers have already churned (**Lost** and **Hibernating**).
+- Small electronic devices were the most popular in 2023. Wireless audio devices (earbuds/headphones) were by far the most popular.
+- Ratings tend to extremes, especially towards 5 star reviews.
 
 ## Recommendations
 - Customers in the **About to Sleep** and **Can't Lose Them** segments should be targeted with discounts and promotions. This could be done by showing discounted products in their product recommendations (on the front page) or offering these customers a 1-month trial of Amazon Prime.
@@ -164,7 +167,8 @@ The customers are segmented to the following groups:
 - Customers in the **Needs Attention** and **At Risk** segments require more careful consideration. They are at risk of churning, but have low average and total spending. The benefits of retaining them may not be worth the costs of doing so.
 - Marketing campaigns should be launched to find **New Customers** and reach **Hibernating** and **Lost** customers in an attempt to rekindle interest and get them to return.
 - Consider rewarding **Champions**, **Loyal Customers**, and **Potential Loyalists** for being good customers. Consider offering exclusive perks, discounts, or coupons to these customers. Or create some loyalty program based on spending, which may encourage more purchases from them.
-
+- Consider developing Amazon branded audio devices like earbuds and speakers. Continue development of Fire and Echo products.
+- Investigate 5 star reviews for any fake reviews.
 ---
 
 # Data Source
